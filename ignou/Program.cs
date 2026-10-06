@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     {
         OnMessageReceived = context =>
         {
-            var token = context.Request.Cookies["jwtToken"];
+            var token = context.Request.Cookies["AuthToken"];
             if (!string.IsNullOrEmpty(token))
             {
                 context.Token = token;
@@ -74,6 +74,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -85,3 +86,4 @@ app.MapControllerRoute(
 
 
 app.Run();
+

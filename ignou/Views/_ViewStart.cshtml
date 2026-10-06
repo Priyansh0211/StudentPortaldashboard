@@ -1,3 +1,26 @@
 ﻿@{
-    Layout = "_Layout";
+    // Check agar user login hai
+    if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        // Agar user ka role "Student" hai
+        if (User.IsInRole("Student"))
+        {
+            Layout = "_StudentLayout";
+        }
+        // Agar user ka role "Admin" hai
+        else if (User.IsInRole("Admin"))
+        {
+            Layout = "_AdminLayout";
+        }
+        // Agar koi aur role hai
+        else
+        {
+            Layout = "_Layout";
+        }
+    }
+    else
+    {
+        // Agar user login nahi hai (Login/Register page par hai)
+        Layout = "_Layout";
+    }
 }

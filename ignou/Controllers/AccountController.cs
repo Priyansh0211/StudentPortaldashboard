@@ -77,7 +77,6 @@ namespace ignou.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel model)
@@ -89,14 +88,12 @@ namespace ignou.Controllers
 
             var user = _db.Users.FirstOrDefault(u => u.Email == model.Email);
 
-            if (user == null ||
-                !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
             {
                 ModelState.AddModelError(
                     "",
                     "Galat Email ya Password."
                 );
-
                 return View(model);
             }
 
@@ -105,19 +102,24 @@ namespace ignou.Controllers
             Response.Cookies.Append("AuthToken", token, new CookieOptions
             {
                 HttpOnly = true,
-
-                // Local HTTPS par true rakho
                 Secure = true,
-
                 SameSite = SameSiteMode.Strict,
-
                 Expires = DateTime.UtcNow.AddHours(2)
             });
 
-            return RedirectToAction("Index", "StudentDashboard");
+            // --- YAHAN CHANGE KIYA HAI ---
+            // Role ke hisaab se redirect karein
+            if (user.Role == "Admin")
+            {
+                // Agar Admin dashboard banaya hai, toh uska Action aur Controller name yahan daalein
+                return RedirectToAction("Index", "AdminDashboard");
+            }
+
+            // Default Student ke liye
+            return RedirectToAction("Dashboard", "StudentDashboard");
         }
-
-
+        
+        
         // --- LOGOUT ---
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -146,7 +148,8 @@ namespace ignou.Controllers
             {
         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
         new Claim(ClaimTypes.Email, user.Email),
-        new Claim(ClaimTypes.Role, user.Role)
+        new Claim(ClaimTypes.Role, user.Role),
+        new Claim(ClaimTypes.Name,user.FullName)
     };
 
             var token = new JwtSecurityToken(
