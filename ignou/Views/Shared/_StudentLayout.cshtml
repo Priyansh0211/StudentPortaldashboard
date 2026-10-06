@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IGNOU Portal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons for Sidebar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+            body {
+                background-color: #f4f5f7; /* Halka grey background jaisa image me hai */
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                overflow-x: hidden;
+            }
+
+            /* --- FIXED NAVBAR --- */
+            .top-navbar {
+                height: 60px;
+                background-color: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1030;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+            }
+
+            .navbar-brand-custom {
+                color: #007bff; /* IGNOU blue color */
+                font-size: 24px;
+                font-weight: 500;
+                text-decoration: none;
+            }
+
+            /* --- FIXED SIDEBAR --- */
+            .sidebar {
+                width: 250px;
+                background-color: #f8f9fa;
+                position: fixed;
+                top: 60px; /* Navbar ke theek neeche */
+                bottom: 0;
+                left: 0;
+                overflow-y: auto;
+                border-right: 1px solid #dee2e6;
+                padding-top: 15px;
+                z-index: 1020;
+            }
+
+            /* Sidebar Links Styling */
+            .sidebar-link {
+                display: block;
+                padding: 10px 20px;
+                color: #495057;
+                text-decoration: none;
+                font-size: 14px;
+            }
+
+            .sidebar-link:hover {
+                background-color: #e9ecef;
+                color: #007bff;
+            }
+
+            .sidebar-heading {
+                font-size: 15px;
+                font-weight: 600;
+                color: #007bff;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            /* --- MAIN CONTENT AREA --- */
+            .main-content {
+                margin-top: 60px; /* Navbar ki height */
+                margin-left: 250px; /* Sidebar ki width */
+                padding: 20px;
+                min-height: calc(100vh - 60px);
+            }
+
+            /* Responsive adjustments */
+            @@media (max-width: 768px) {
+                .sidebar {
+                    transform: translateX(-100%);
+                    transition: 0.3s;
+                }
+                .main-content {
+                    margin-left: 0;
+                }
+                .sidebar.active {
+                    transform: translateX(0);
+                }
+            }
+    </style>
+</head>
+<body>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <!-- FIXED TOP NAVBAR -->
+        <div class="top-navbar">
+            <a href="#" class="navbar-brand-custom">IGNOU</a>
+
+            <div class="d-flex align-items-center">
+                <!-- User Profile icon with Enrollment Number/Username -->
+                <i class="bi bi-person-circle fs-4 me-2 text-secondary"></i>
+                <span class="text-secondary">@User.Identity.Name</span>
+
+                <!-- Logout Form -->
+                <form asp-controller="Account" asp-action="Logout" method="post" class="ms-3 m-0 p-0">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FIXED SIDEBAR -->
+        <div class="sidebar">
+
+            <!-- Collapsible Section: Student -->
+            <div class="sidebar-heading" data-bs-toggle="collapse" data-bs-target="#studentMenu">
+                <span><i class="bi bi-person me-2"></i>Student</span>
+                <i class="bi bi-caret-down-fill" style="font-size: 12px;"></i>
+            </div>
+            <div class="collapse show" id="studentMenu">
+                <!-- 'show' class se ye default open rahega -->
+                <a href="@Url.Action("Dashboard", "StudentDashboard")" class="sidebar-link ms-3">Dashboard</a>
+                <a href="@Url.Action("Profile", "StudentDashboard")" class="sidebar-link ms-3">Profile</a>
+                <a href="#" class="sidebar-link ms-3">MCA_NEW : Master of Co...</a>
+                <a href="#" class="sidebar-link ms-3">Re-Registration</a>
+                <a href="#" class="sidebar-link ms-3">Services</a>
+            </div>
+
+            <!-- Collapsible Section: Examination -->
+            <div class="sidebar-heading mt-2" data-bs-toggle="collapse" data-bs-target="#examMenu">
+                <span><i class="bi bi-journal-text me-2"></i>Examination</span>
+                <i class="bi bi-caret-down-fill" style="font-size: 12px;"></i>
+            </div>
+            <div class="collapse" id="examMenu">
+                <a href="#" class="sidebar-link ms-3">Admit Card</a>
+                <a href="#" class="sidebar-link ms-3">Results</a>
+            </div>
+
+            <!-- Collapsible Section: Training & Placement -->
+            <div class="sidebar-heading mt-2" data-bs-toggle="collapse" data-bs-target="#trainingMenu">
+                <span><i class="bi bi-briefcase me-2"></i>Training & Placement</span>
+                <i class="bi bi-caret-down-fill" style="font-size: 12px;"></i>
+            </div>
+            <div class="collapse" id="trainingMenu">
+                <a href="#" class="sidebar-link ms-3">Placement Drive</a>
+            </div>
+
+            <!-- Other Links -->
+            <div class="sidebar-heading mt-2">
+                <span><i class="bi bi-award me-2"></i>My Certificates</span>
+            </div>
+            <div class="sidebar-heading mt-2">
+                <span><i class="bi bi-credit-card me-2"></i>Payment</span>
+            </div>
+
+        </div>
+
+        <!-- MAIN CONTENT (Shifts right because of sidebar) -->
+        <div class="main-content">
+            @RenderBody()
+        </div>
+    }
+    else
+    {
+        <!-- Layout for NON-LOGGED IN users (Login/Register pages) -->
+        <div class="container mt-5">
+            @RenderBody()
+        </div>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

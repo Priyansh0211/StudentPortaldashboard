@@ -6,34 +6,19 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// =====================================================
-// SERVICES
-// =====================================================
-
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-// =====================================================
-// DATABASE
-// =====================================================
-
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("dbcs")
-    ));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
 
-
-// =====================================================
-// JWT AUTHENTICATION
-// =====================================================
+//var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+//var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
 
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme =
-        JwtBearerDefaults.AuthenticationScheme;
-
-    options.DefaultChallengeScheme =
-        JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options =>
 {
@@ -49,84 +34,55 @@ builder.Services.AddAuthentication(options =>
 
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(
-                builder.Configuration["Jwt:Key"]!
-            )
-        )
+                builder.Configuration["Jwt:key"]!))
+
     };
 
 
-    // =================================================
-    // READ JWT FROM AUTHENTICATION COOKIE
-    // =================================================
 
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
             var token = context.Request.Cookies["AuthToken"];
-
             if (!string.IsNullOrEmpty(token))
             {
                 context.Token = token;
             }
-
             return Task.CompletedTask;
         },
-
-
-        // =================================================
-        // REDIRECT UNAUTHORIZED USER TO LOGIN
-        // =================================================
-
-        OnChallenge = context =>
-        {
-            context.HandleResponse();
-
-            context.Response.Redirect("/Account/Login");
-
-            return Task.CompletedTask;
-        }
+        //},
+        //OnChallenge = context =>
+        //{
+        //    context.HandleResponse();
+        //    context.Response.Redirect("/Account/Login");
+        //    return Task.CompletedTask;
+        //}
     };
 });
 
-
 var app = builder.Build();
 
-
-// =====================================================
-// HTTP REQUEST PIPELINE
-// =====================================================
-
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
 
-
-// IMPORTANT:
-// Authentication must come before Authorization.
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
-
-// =====================================================
-// ROUTING
-// =====================================================
 
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Register}/{id?}"
-)
-.WithStaticAssets();
+    pattern: "{controller=Account}/{action=Register}/{id?}")
+    .WithStaticAssets();
 
 
 app.Run();
