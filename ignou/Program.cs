@@ -6,19 +6,34 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// =====================================================
+// SERVICES
+// =====================================================
+
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
 
-//var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-//var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+// =====================================================
+// DATABASE
+// =====================================================
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("dbcs")
+    ));
+
+
+// =====================================================
+// JWT AUTHENTICATION
+// =====================================================
 
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme =
+        JwtBearerDefaults.AuthenticationScheme;
+
+    options.DefaultChallengeScheme =
+        JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options =>
 {
@@ -27,61 +42,91 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidateIssuerSigningKey= true,
+        ValidateIssuerSigningKey = true,
 
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
 
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(
-                builder.Configuration["Jwt:key"]!))
-
+                builder.Configuration["Jwt:Key"]!
+            )
+        )
     };
 
 
+    // =================================================
+    // READ JWT FROM AUTHENTICATION COOKIE
+    // =================================================
 
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
-            var token = context.Request.Cookies["jwtToken"];
+            var token = context.Request.Cookies["AuthToken"];
+
             if (!string.IsNullOrEmpty(token))
             {
                 context.Token = token;
             }
+
             return Task.CompletedTask;
         },
-        //},
-        //OnChallenge = context =>
-        //{
-        //    context.HandleResponse();
-        //    context.Response.Redirect("/Account/Login");
-        //    return Task.CompletedTask;
-        //}
+
+
+        // =================================================
+        // REDIRECT UNAUTHORIZED USER TO LOGIN
+        // =================================================
+
+        OnChallenge = context =>
+        {
+            context.HandleResponse();
+
+            context.Response.Redirect("/Account/Login");
+
+            return Task.CompletedTask;
+        }
     };
 });
 
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
+// =====================================================
+// HTTP REQUEST PIPELINE
+// =====================================================
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
+
+// IMPORTANT:
+// Authentication must come before Authorization.
+
+app.UseAuthentication();
+
 app.UseAuthorization();
+
+
+// =====================================================
+// ROUTING
+// =====================================================
 
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Register}/{id?}")
-    .WithStaticAssets();
+    pattern: "{controller=Account}/{action=Register}/{id?}"
+)
+.WithStaticAssets();
 
 
 app.Run();

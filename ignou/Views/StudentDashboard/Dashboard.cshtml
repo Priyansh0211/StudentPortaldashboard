@@ -1,0 +1,346 @@
+﻿@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="simple-dashboard">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="simple-dashboard-header">
+
+        <div class="simple-brand">
+
+            <div class="simple-brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <strong>Student Portal</strong>
+                <span>IGNOU</span>
+            </div>
+
+        </div>
+
+        <div class="simple-header-right">
+
+            <div class="simple-student-info">
+
+                <div class="simple-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>Student Name</strong>
+                    <span>Student</span>
+                </div>
+
+            </div>
+
+            <form asp-controller="Account"
+                  asp-action="Logout"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <button type="submit"
+                        class="simple-logout"
+                        title="Logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= BODY ================= -->
+
+    <div class="simple-dashboard-body">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="simple-sidebar">
+
+            <div class="simple-sidebar-title">
+                MAIN MENU
+            </div>
+
+
+            <nav class="simple-sidebar-menu">
+
+                <a href="#"
+                   class="simple-menu-item active">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+
+                <a href="#"
+                   class="simple-menu-item">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <span>My Profile</span>
+
+                </a>
+
+
+                <a href="#"
+                   class="simple-menu-item">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <span>My Program</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="simple-sidebar-bottom">
+
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="simple-sidebar-logout">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        <span>Logout</span>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="simple-dashboard-content">
+
+
+            <!-- Breadcrumb -->
+
+            <div class="simple-breadcrumb">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Home</span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <strong>Dashboard</strong>
+
+            </div>
+
+
+            <!-- Heading -->
+
+            <div class="simple-dashboard-heading">
+
+                <div>
+
+                    <h1>Dashboard</h1>
+
+                    <p>
+                        Welcome to your IGNOU student portal.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Welcome Card -->
+
+            <section class="simple-welcome-card">
+
+                <div class="simple-welcome-content">
+
+                    <span class="simple-welcome-label">
+                        Welcome back
+                    </span>
+
+                    <h2>Hello, Student! 👋</h2>
+
+                    <p>
+                        You can view your student information and
+                        academic programme details from this dashboard.
+                    </p>
+
+                </div>
+
+                <div class="simple-welcome-icon">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                </div>
+
+            </section>
+
+
+            <!-- Student Information -->
+
+            <section class="simple-dashboard-card">
+
+                <div class="simple-card-header">
+
+                    <div class="simple-card-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+
+                    <div>
+                        <h2>Student Information</h2>
+
+                        <p>
+                            Your basic student account details
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="simple-info-grid">
+
+
+                    <div class="simple-info-item">
+
+                        <span>Application Number</span>
+
+                        <strong>
+                            Not Assigned
+                        </strong>
+
+                    </div>
+
+
+                    <div class="simple-info-item">
+
+                        <span>Enrollment Number</span>
+
+                        <strong>
+                            Not Assigned
+                        </strong>
+
+                    </div>
+
+
+                    <div class="simple-info-item">
+
+                        <span>Student Name</span>
+
+                        <strong>
+                            Student Name
+                        </strong>
+
+                    </div>
+
+
+                    <div class="simple-info-item">
+
+                        <span>Account Status</span>
+
+                        <strong class="status-active">
+                            Active
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Programme Information -->
+
+            <section class="simple-dashboard-card">
+
+                <div class="simple-card-header">
+
+                    <div class="simple-card-icon program-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div>
+                        <h2>My Program</h2>
+
+                        <p>
+                            Your registered academic programme
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="simple-program-box">
+
+                    <div class="simple-program-main">
+
+                        <span>PROGRAMME NAME</span>
+
+                        <h3>
+                            Your Programme
+                        </h3>
+
+                    </div>
+
+
+                    <div class="simple-program-type">
+
+                        <span>PROGRAMME TYPE</span>
+
+                        <strong>
+                            Not Available
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Getting Started -->
+
+            <section class="simple-dashboard-card simple-help-card">
+
+                <div class="simple-help-icon">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+
+                <div>
+
+                    <h3>Getting Started</h3>
+
+                    <p>
+                        Your student account has been created successfully.
+                        Application and enrollment details will be available
+                        once they are assigned by the university.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+</div>
