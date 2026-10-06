@@ -141,10 +141,14 @@ namespace ignou.Controllers
                 }
             );
 
-            return RedirectToAction(
-                "Dashboard",
-                "StudentDashboard"
-            );
+            if (user.Role == "Admin")
+            {
+                // Agar Admin dashboard banaya hai, toh uska Action aur Controller name yahan daalein
+                return RedirectToAction("Index", "AdminDashboard");
+            }
+
+            // Default Student ke liye
+            return RedirectToAction("Dashboard", "StudentDashboard");
         }
 
         // LOGOUT
@@ -178,26 +182,11 @@ namespace ignou.Controllers
 
             var claims = new[]
             {
-                new Claim(
-                    ClaimTypes.NameIdentifier,
-                    user.Id.ToString()
-                ),
-
-                new Claim(
-                    ClaimTypes.Name,
-                    user.FullName
-                ),
-
-                new Claim(
-                    ClaimTypes.Email,
-                    user.Email
-                ),
-
-                new Claim(
-                    ClaimTypes.Role,
-                    user.Role ?? "Student"
-                )
-            };
+    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+    new Claim(ClaimTypes.Email, user.Email),
+    new Claim(ClaimTypes.Role, user.Role),
+    new Claim(ClaimTypes.Name,user.FullName)
+};
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
@@ -207,8 +196,7 @@ namespace ignou.Controllers
                 signingCredentials: credentials
             );
 
-            return new JwtSecurityTokenHandler()
-                .WriteToken(token);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
