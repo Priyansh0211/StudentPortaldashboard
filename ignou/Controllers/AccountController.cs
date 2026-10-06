@@ -11,6 +11,7 @@ namespace ignou.Controllers
 {
     public class AccountController : Controller
     {
+        //test
         private readonly AppDbContext _db;
         private readonly IConfiguration _config;
 
