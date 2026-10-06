@@ -1,16 +1,250 @@
 ﻿@model ignou.Models.LoginViewModel
-<h2>Student Login</h2>
-<form asp-action="Login" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+
+@{
+ViewData["Title"] = "Student Login";
+}
+
+<div class="login-page">
+
+```
+<div class="login-container">
+
+    <!-- Login Header -->
+    <div class="login-heading">
+
+        <div class="login-brand-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+
+        <div class="login-kicker">
+            STUDENT PORTAL
+        </div>
+
+        <h1>Welcome Back</h1>
+
+        <p>
+            Sign in to access your IGNOU student account and continue
+            your academic journey.
+        </p>
+
     </div>
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+
+
+    <!-- Login Card -->
+    <div class="login-card">
+
+        <div class="login-card-header">
+
+            <div class="login-icon">
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+
+            <div>
+                <h2>Student Login</h2>
+                <span>Enter your account credentials</span>
+            </div>
+
+        </div>
+
+
+        <div class="login-card-body">
+
+            <form asp-action="Login"
+                  asp-controller="Account"
+                  method="post"
+                  autocomplete="off">
+
+                @Html.AntiForgeryToken()
+
+                <!-- Validation Summary -->
+                <div asp-validation-summary="ModelOnly"
+                     class="login-validation-summary">
+                </div>
+
+
+                <!-- Email -->
+                <div class="login-field">
+
+                    <label asp-for="Email">
+                        Email Address
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="login-input-wrapper">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input asp-for="Email"
+                               class="login-input"
+                               type="email"
+                               placeholder="Enter your email address"
+                               autocomplete="email" />
+
+                    </div>
+
+                    <span asp-validation-for="Email"
+                          class="login-field-validation">
+                    </span>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="login-field">
+
+                    <label asp-for="Password">
+                        Password
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="login-input-wrapper password-login-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input asp-for="Password"
+                               id="loginPassword"
+                               class="login-input"
+                               type="password"
+                               placeholder="Enter your password"
+                               autocomplete="current-password" />
+
+                        <button type="button"
+                                class="login-password-toggle"
+                                id="loginPasswordToggle"
+                                aria-label="Show password">
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                    <span asp-validation-for="Password"
+                          class="login-field-validation">
+                    </span>
+
+                </div>
+
+
+                <!-- Login Button -->
+                <button type="submit"
+                        class="login-submit">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    <span>Sign In to Portal</span>
+
+                </button>
+
+
+                <!-- Register -->
+                <div class="login-register">
+
+                    <span>Don't have a student account?</span>
+
+                    <a asp-controller="Account"
+                       asp-action="Register">
+
+                        Create Account
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+               </div>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-success mt-3">Login</button>
-</form>
+
+
+    <!-- Security Note -->
+    <div class="login-security-note">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <div>
+            <strong>Secure Login</strong>
+
+            <span>
+                Your login credentials are protected and securely
+                processed by the student portal.
+            </span>
+        </div>
+
+    </div>
+
+
+    <!-- Footer Text -->
+    <div class="login-footer-text">
+
+        <i class="fa-solid fa-graduation-cap"></i>
+
+        IGNOU Student Portal
+
+        <span>•</span>
+
+        Secure Student Access
+
+    </div>
+
+</div>
+```
+
+</div>
+
+@section Scripts {
+
+```
+<partial name="_ValidationScriptsPartial" />
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const passwordInput =
+            document.getElementById("loginPassword");
+
+        const passwordToggle =
+            document.getElementById("loginPasswordToggle");
+
+        if (passwordInput && passwordToggle) {
+
+            passwordToggle.addEventListener("click", function () {
+
+                const icon =
+                    passwordToggle.querySelector("i");
+
+                if (passwordInput.type === "password") {
+
+                    passwordInput.type = "text";
+
+                    icon.classList.remove("fa-eye");
+                    icon.classList.add("fa-eye-slash");
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    icon.classList.remove("fa-eye-slash");
+                    icon.classList.add("fa-eye");
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+                }
+
+            });
+
+        }
+
+    });
+
+</script>
+```
+
+}

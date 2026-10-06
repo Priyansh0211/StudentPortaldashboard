@@ -1,191 +1,1095 @@
 ﻿@model ignou.Models.RegisterViewModel
+
 @{
     ViewData["Title"] = "Student Registration";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">New Student Registration</h2>
-    <form asp-action="Register" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="registration-page">
 
-        <!-- 1. Personal Details -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">Personal Details</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label>Full Name</label>
-                        <input asp-for="FullName" class="form-control" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Father's Name</label>
-                        <input asp-for="FatherName" class="form-control" />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Date of Birth</label>
-                        <input asp-for="DOB" type="date" class="form-control" />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Gender</label>
-                        <select asp-for="Gender" class="form-select">
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Category</label>
-                        <select asp-for="Category" class="form-select">
-                            <option value="">Select Category</option>
-                            <option value="General">General</option>
-                            <option value="OBC">OBC</option>
-                            <option value="SC">SC</option>
-                            <option value="ST">ST</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Blood Group</label>
-                        <select asp-for="BloodGroup" class="form-select">
-                            <option value="">Select Blood Group</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="O+">O+</option>
-                            <option value="AB+">AB+</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Marital Status</label>
-                        <select asp-for="MaritalStatus" class="form-select">
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Personal Disability</label>
-                        <select asp-for="PersonalDisability" class="form-select">
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Aadhaar Number</label>
-                        <input asp-for="AadhaarNo" class="form-control" />
-                        <span asp-validation-for="AadhaarNo" class="text-danger"></span>
-                    </div>
-                </div>
+    <div class="registration-container">
+
+        <!--
+             PAGE HEADER
+         -->
+
+        <div class="registration-heading">
+
+            <div>
+
+                <span class="page-kicker">
+                    <i class="fa-solid fa-user-plus"></i>
+                    STUDENT PORTAL
+                </span>
+
+                <h1>Create Your Student Account</h1>
+
+                <p>
+                    Complete the registration form to create your IGNOU
+                    student portal account.
+                </p>
+
             </div>
+
+
+            <div class="secure-badge">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Secure Registration
+                    <small>Your information is protected</small>
+                </span>
+
+            </div>
+
         </div>
 
-        <!-- 2. Contact Details -->
-        <div class="card mb-4">
-            <div class="card-header bg-secondary text-white">Contact & Login Details</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label>Email</label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Mobile Number</label>
-                        <input asp-for="MobileNo" class="form-control" />
-                        <span asp-validation-for="MobileNo" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Password</label>
-                        <input asp-for="Password" type="password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
+
+        <!-- 
+             VALIDATION SUMMARY
+         -->
+
+        <div asp-validation-summary="ModelOnly"
+             class="validation-summary"
+             role="alert">
         </div>
 
-        <!-- 3. Address Details -->
-        <div class="card mb-4">
-            <div class="card-header bg-info text-white">Address Details</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label>House / Street Address</label>
-                        <input asp-for="House" class="form-control" />
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>City</label>
-                        <input asp-for="City" class="form-control" />
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>District</label>
-                        <input asp-for="District" class="form-control" />
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>State</label>
-                        <input asp-for="State" class="form-control" />
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>Pincode</label>
-                        <input asp-for="Pincode" class="form-control" />
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 4. Programme Details -->
-        <div class="card mb-4">
-            <div class="card-header bg-success text-white">Programme Details</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label>Programme Type</label>
-                        <select asp-for="ProgramType" class="form-select" id="programTypeSelect" onchange="populatePrograms()">
-                            <option value="">Select Type</option>
-                            <option value="Bachelor Degree">Bachelor Degree</option>
-                            <option value="Master Degree">Master Degree</option>
-                            <option value="Diploma">Diploma</option>
-                        </select>
-                        <span asp-validation-for="ProgramType" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Programme Name</label>
-                        <select asp-for="ProgramName" class="form-select" id="programNameSelect">
-                            <option value="">Select Programme First</option>
-                        </select>
-                        <span asp-validation-for="ProgramName" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- 
+             REGISTRATION FORM
+         -->
 
-        <button type="submit" class="btn btn-primary btn-lg mb-5 w-100">Submit Registration</button>
-    </form>
+        <form asp-action="Register"
+              asp-controller="Account"
+              method="post"
+              class="registration-form">
+
+            @Html.AntiForgeryToken()
+
+
+            <!-- 
+                 1. PERSONAL DETAILS
+             -->
+
+            <section class="registration-card">
+
+                <div class="section-header blue-header">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+                        <h2>Personal Details</h2>
+                        <p>Enter your personal information</p>
+                    </div>
+
+                </div>
+
+
+                <div class="section-body">
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+
+                            <label asp-for="FullName">
+                                Full Name
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <input asp-for="FullName"
+                                       class="form-control-custom"
+                                       placeholder="Enter your full name"
+                                       autocomplete="name" />
+
+                            </div>
+
+                            <span asp-validation-for="FullName"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label asp-for="FatherName">
+                                Father's Name
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-user-tie"></i>
+
+                                <input asp-for="FatherName"
+                                       class="form-control-custom"
+                                       placeholder="Enter father's name" />
+
+                            </div>
+
+                            <span asp-validation-for="FatherName"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Date of Birth -->
+
+                        <div class="form-field">
+
+                            <label asp-for="DOB">
+                                Date of Birth
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <input asp-for="DOB"
+                                       type="date"
+                                       class="form-control-custom" />
+
+                            </div>
+
+                            <span asp-validation-for="DOB"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Gender -->
+
+                        <div class="form-field">
+
+                            <label asp-for="Gender">
+                                Gender
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-venus-mars"></i>
+
+                                <select asp-for="Gender"
+                                        class="form-control-custom">
+
+                                    <option value="">
+                                        Select Gender
+                                    </option>
+
+                                    <option value="Male">
+                                        Male
+                                    </option>
+
+                                    <option value="Female">
+                                        Female
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="Gender"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Category -->
+
+                        <div class="form-field">
+
+                            <label asp-for="Category">
+                                Category
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-users"></i>
+
+                                <select asp-for="Category"
+                                        class="form-control-custom">
+
+                                    <option value="">
+                                        Select Category
+                                    </option>
+
+                                    <option value="General">
+                                        General
+                                    </option>
+
+                                    <option value="OBC">
+                                        OBC
+                                    </option>
+
+                                    <option value="SC">
+                                        SC
+                                    </option>
+
+                                    <option value="ST">
+                                        ST
+                                    </option>
+
+                                    <option value="EWS">
+                                        EWS
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="Category"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Blood Group -->
+
+                        <div class="form-field">
+
+                            <label asp-for="BloodGroup">
+                                Blood Group
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-droplet"></i>
+
+                                <select asp-for="BloodGroup"
+                                        class="form-control-custom">
+
+                                    <option value="">
+                                        Select Blood Group
+                                    </option>
+
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="BloodGroup"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Marital Status -->
+
+                        <div class="form-field">
+
+                            <label asp-for="MaritalStatus">
+                                Marital Status
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-heart"></i>
+
+                                <select asp-for="MaritalStatus"
+                                        class="form-control-custom">
+
+                                    <option value="">
+                                        Select Marital Status
+                                    </option>
+
+                                    <option value="Single">
+                                        Single
+                                    </option>
+
+                                    <option value="Married">
+                                        Married
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="MaritalStatus"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Personal Disability -->
+
+                        <div class="form-field">
+
+                            <label asp-for="PersonalDisability">
+                                Personal Disability
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-wheelchair"></i>
+
+                                <select asp-for="PersonalDisability"
+                                        class="form-control-custom">
+
+                                    <option value="">
+                                        Select Option
+                                    </option>
+
+                                    <option value="No">
+                                        No
+                                    </option>
+
+                                    <option value="Yes">
+                                        Yes
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="PersonalDisability"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Aadhaar -->
+
+                        <div class="form-field">
+
+                            <label asp-for="AadhaarNo">
+                                Aadhaar Number
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-id-card"></i>
+
+                                <input asp-for="AadhaarNo"
+                                       class="form-control-custom"
+                                       placeholder="Enter 12-digit Aadhaar number"
+                                       maxlength="12"
+                                       inputmode="numeric"
+                                       autocomplete="off" />
+
+                            </div>
+
+                            <span asp-validation-for="AadhaarNo"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 2. CONTACT & LOGIN DETAILS
+            ================================================== -->
+
+            <section class="registration-card">
+
+                <div class="section-header dark-header">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+
+                    <div>
+                        <h2>Contact & Login Details</h2>
+                        <p>Use these details to access your account</p>
+                    </div>
+
+                </div>
+
+
+                <div class="section-body">
+
+                    <div class="form-grid">
+
+
+                        <!-- Email -->
+
+                        <div class="form-field">
+
+                            <label asp-for="Email">
+                                Email Address
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input asp-for="Email"
+                                       type="email"
+                                       class="form-control-custom"
+                                       placeholder="example@email.com"
+                                       autocomplete="email" />
+
+                            </div>
+
+                            <span asp-validation-for="Email"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Mobile -->
+
+                        <div class="form-field">
+
+                            <label asp-for="MobileNo">
+                                Mobile Number
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-mobile-screen"></i>
+
+                                <input asp-for="MobileNo"
+                                       class="form-control-custom"
+                                       placeholder="Enter 10-digit mobile number"
+                                       maxlength="10"
+                                       inputmode="numeric"
+                                       autocomplete="tel" />
+
+                            </div>
+
+                            <span asp-validation-for="MobileNo"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Password -->
+
+                        <div class="form-field">
+
+                            <label asp-for="Password">
+                                Password
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper password-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input asp-for="Password"
+                                       type="password"
+                                       id="passwordField"
+                                       class="form-control-custom"
+                                       placeholder="Create a password"
+                                       autocomplete="new-password" />
+
+                                <button type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('passwordField', this)"
+                                        aria-label="Show password">
+
+                                    <i class="fa-regular fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                            <span asp-validation-for="Password"
+                                  class="field-validation">
+                            </span>
+
+                            <small class="field-hint">
+                                Password must meet the minimum security requirements.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 3. ADDRESS DETAILS
+            ================================================== -->
+
+            <section class="registration-card">
+
+                <div class="section-header green-header">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <div>
+                        <h2>Address Details</h2>
+                        <p>Enter your current residential address</p>
+                    </div>
+
+                </div>
+
+
+                <div class="section-body">
+
+                    <div class="form-grid">
+
+
+                        <!-- House -->
+
+                        <div class="form-field">
+
+                            <label asp-for="House">
+                                House / Street Address
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-house"></i>
+
+                                <input asp-for="House"
+                                       class="form-control-custom"
+                                       placeholder="House number, street, locality" />
+
+                            </div>
+
+                            <span asp-validation-for="House"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- City -->
+
+                        <div class="form-field">
+
+                            <label asp-for="City">
+                                City
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-city"></i>
+
+                                <input asp-for="City"
+                                       class="form-control-custom"
+                                       placeholder="Enter city" />
+
+                            </div>
+
+                            <span asp-validation-for="City"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- District -->
+
+                        <div class="form-field">
+
+                            <label asp-for="District">
+                                District
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-map-location-dot"></i>
+
+                                <input asp-for="District"
+                                       class="form-control-custom"
+                                       placeholder="Enter district" />
+
+                            </div>
+
+                            <span asp-validation-for="District"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- State -->
+
+                        <div class="form-field">
+
+                            <label asp-for="State">
+                                State
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-map"></i>
+
+                                <input asp-for="State"
+                                       class="form-control-custom"
+                                       placeholder="Enter state" />
+
+                            </div>
+
+                            <span asp-validation-for="State"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Pincode -->
+
+                        <div class="form-field">
+
+                            <label asp-for="Pincode">
+                                Pincode
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-location-crosshairs"></i>
+
+                                <input asp-for="Pincode"
+                                       class="form-control-custom"
+                                       placeholder="Enter 6-digit pincode"
+                                       maxlength="6"
+                                       inputmode="numeric" />
+
+                            </div>
+
+                            <span asp-validation-for="Pincode"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 4. PROGRAMME DETAILS
+            ================================================== -->
+
+            <section class="registration-card">
+
+                <div class="section-header purple-header">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div>
+                        <h2>Programme Details</h2>
+                        <p>Select the programme you want to enroll in</p>
+                    </div>
+
+                </div>
+
+
+                <div class="section-body">
+
+                    <div class="form-grid">
+
+
+                        <!-- Programme Type -->
+
+                        <div class="form-field">
+
+                            <label asp-for="ProgramType">
+                                Programme Type
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-layer-group"></i>
+
+                                <select asp-for="ProgramType"
+                                        class="form-control-custom"
+                                        id="programTypeSelect">
+
+                                    <option value="">
+                                        Select Programme Type
+                                    </option>
+
+                                    <option value="Bachelor Degree">
+                                        Bachelor Degree
+                                    </option>
+
+                                    <option value="Master Degree">
+                                        Master Degree
+                                    </option>
+
+                                    <option value="Diploma">
+                                        Diploma
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="ProgramType"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Programme Name -->
+
+                        <div class="form-field">
+
+                            <label asp-for="ProgramName">
+                                Programme Name
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+
+                                <i class="fa-solid fa-book-open"></i>
+
+                                <select asp-for="ProgramName"
+                                        class="form-control-custom"
+                                        id="programNameSelect">
+
+                                    <option value="">
+                                        Select Programme Type First
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="ProgramName"
+                                  class="field-validation">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SUBMIT AREA
+            ================================================== -->
+
+            <div class="registration-actions">
+
+
+                <!-- Login Link -->
+
+                <div class="login-existing">
+
+                    <span>
+                        Already registered?
+                    </span>
+
+                    <a asp-controller="Account"
+                       asp-action="Login">
+
+                        Login here
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button type="submit"
+                        class="register-submit">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Create Student Account
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 NOTE
+            ================================================== -->
+
+            <div class="registration-note">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>
+                    Fields marked with <strong>*</strong> are mandatory.
+                    Please make sure that all information entered is
+                    accurate before submitting the registration form.
+                </span>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
-<!-- JavaScript for Dynamic Dropdown -->
-<script>
-    const programData = {
-        "Bachelor Degree": ["BCA", "BA", "BSc", "BCom", "BBA"],
-        "Master Degree": ["MCA", "MA", "MSc", "MCom", "MBA"],
-        "Diploma": ["PGDCA", "Diploma in IT", "Diploma in Management"]
-    };
 
-    function populatePrograms() {
-        const typeSelect = document.getElementById("programTypeSelect");
-        const nameSelect = document.getElementById("programNameSelect");
-        const selectedType = typeSelect.value;
+<!-- =========================================================
+     PAGE JAVASCRIPT
+========================================================= -->
 
-        // Clear existing options
-        nameSelect.innerHTML = '<option value="">Select Programme Name</option>';
+@section Scripts {
 
-        if (selectedType && programData[selectedType]) {
-            const programs = programData[selectedType];
-            programs.forEach(prog => {
-                let option = document.createElement("option");
-                option.value = prog;
-                option.text = prog;
-                nameSelect.appendChild(option);
-            });
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        /* =====================================================
+           PROGRAMME DATA
+        ===================================================== */
+
+        const programData = {
+
+            "Bachelor Degree": [
+                "BCA",
+                "BA",
+                "BSc",
+                "BCom",
+                "BBA"
+            ],
+
+            "Master Degree": [
+                "MCA",
+                "MA",
+                "MSc",
+                "MCom",
+                "MBA"
+            ],
+
+            "Diploma": [
+                "PGDCA",
+                "Diploma in IT",
+                "Diploma in Management"
+            ]
+
+        };
+
+
+        /* =====================================================
+           PROGRAMME DROPDOWN
+        ===================================================== */
+
+        function populatePrograms(selectedProgram = "") {
+
+            const typeSelect =
+                document.getElementById("programTypeSelect");
+
+            const nameSelect =
+                document.getElementById("programNameSelect");
+
+            if (!typeSelect || !nameSelect) {
+                return;
+            }
+
+            const selectedType =
+                typeSelect.value;
+
+
+            nameSelect.innerHTML =
+                '<option value="">Select Programme Name</option>';
+
+
+            if (selectedType &&
+                programData[selectedType]) {
+
+                programData[selectedType].forEach(function (program) {
+
+                    const option =
+                        document.createElement("option");
+
+                    option.value = program;
+
+                    option.textContent = program;
+
+                    if (program === selectedProgram) {
+                        option.selected = true;
+                    }
+
+                    nameSelect.appendChild(option);
+
+                });
+
+            }
+
         }
-    }
-</script>
+
+
+        /* =====================================================
+           PASSWORD SHOW / HIDE
+        ===================================================== */
+
+        function togglePassword(fieldId, button) {
+
+            const field =
+                document.getElementById(fieldId);
+
+            const icon =
+                button.querySelector("i");
+
+
+            if (!field) {
+                return;
+            }
+
+
+            if (field.type === "password") {
+
+                field.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+                button.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            }
+            else {
+
+                field.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+                button.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+        }
+        
+          // INITIALIZE
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const typeSelect =
+                    document.getElementById("programTypeSelect");
+
+
+                if (typeSelect) {
+
+                    typeSelect.addEventListener(
+                        "change",
+                        function () {
+
+                            populatePrograms();
+
+                        }
+                    );
+
+
+                    // Preserve selected programme after validation error
+
+                    const selectedProgram =
+                        "@Html.Raw(Model?.ProgramName ?? "")";
+
+                    if (typeSelect.value) {
+
+                        populatePrograms(selectedProgram);
+
+                    }
+
+                }
+
+            }
+        );
+        
+           //ONLY ALLOW NUMBERS
+
+        const numericFields = [
+            "AadhaarNo",
+            "MobileNo",
+            "Pincode"
+        ];
+
+
+        numericFields.forEach(function (fieldName) {
+
+            const field =
+                document.querySelector(
+                    '[name="' + fieldName + '"]'
+                );
+
+
+            if (field) {
+
+                field.addEventListener(
+                    "input",
+                    function () {
+
+                        this.value =
+                            this.value.replace(/\D/g, "");
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+}
