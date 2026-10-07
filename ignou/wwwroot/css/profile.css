@@ -1,0 +1,362 @@
+﻿/* ================================
+   STUDENT PROFILE PAGE
+   ================================ */
+
+.profile-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 35px 5px 50px;
+}
+
+
+/* ================================
+   PAGE HEADER
+   ================================ */
+
+.profile-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.profile-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #176ff5;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+}
+
+.profile-page-header h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+    color: #182338;
+}
+
+.profile-page-header p {
+    margin: 8px 0 0;
+    color: #718096;
+    font-size: 15px;
+}
+
+.profile-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: #ecfdf3;
+    color: #16834b;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+    .profile-status i {
+        font-size: 11px;
+    }
+
+
+/* ================================
+   PROFILE SUMMARY
+   ================================ */
+
+.profile-summary {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 28px;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #176ff5, #4285f4);
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(23, 111, 245, 0.14);
+}
+
+.profile-avatar-large {
+    width: 82px;
+    height: 82px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    font-size: 34px;
+}
+
+.profile-summary-info > span {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.profile-summary-info h2 {
+    margin: 5px 0 8px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.profile-summary-info p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.profile-summary-email {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+
+/* ================================
+   PROFILE SECTION
+   ================================ */
+
+.profile-section {
+    background: #ffffff;
+    border: 1px solid #e4e9f0;
+    border-radius: 15px;
+    margin-bottom: 22px;
+    overflow: hidden;
+}
+
+.profile-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.section-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    font-size: 18px;
+}
+
+    .section-icon.blue {
+        background: #eaf2ff;
+        color: #176ff5;
+    }
+
+    .section-icon.green {
+        background: #eaf9f1;
+        color: #18a65b;
+    }
+
+    .section-icon.purple {
+        background: #f1ebff;
+        color: #7650d9;
+    }
+
+.profile-section-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #182338;
+}
+
+.profile-section-header p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: #7a8799;
+}
+
+
+/* ================================
+   INFORMATION GRID
+   ================================ */
+
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+}
+
+.profile-info-item {
+    padding: 19px 24px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+    .profile-info-item:nth-child(odd) {
+        border-right: 1px solid #edf0f4;
+    }
+
+    .profile-info-item span {
+        display: block;
+        margin-bottom: 6px;
+        color: #7a8799;
+        font-size: 13px;
+    }
+
+    .profile-info-item strong {
+        display: block;
+        color: #253044;
+        font-size: 15px;
+        font-weight: 600;
+        word-break: break-word;
+    }
+
+
+/* ================================
+   ACADEMIC INFORMATION
+   ================================ */
+
+.academic-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+    .academic-profile-grid > div {
+        padding: 22px 24px;
+        border-right: 1px solid #edf0f4;
+    }
+
+        .academic-profile-grid > div:last-child {
+            border-right: none;
+        }
+
+    .academic-profile-grid span {
+        display: block;
+        margin-bottom: 7px;
+        color: #7a8799;
+        font-size: 13px;
+    }
+
+    .academic-profile-grid strong {
+        color: #253044;
+        font-size: 15px;
+    }
+
+.active-text {
+    color: #16834b !important;
+}
+
+    .active-text i {
+        font-size: 7px;
+        margin-right: 5px;
+    }
+
+
+/* ================================
+   INFORMATION NOTE
+   ================================ */
+
+.profile-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 18px 20px;
+    margin-top: 5px;
+    background: #f7faff;
+    border: 1px solid #dceaff;
+    border-radius: 12px;
+}
+
+.note-icon {
+    color: #176ff5;
+    font-size: 18px;
+    margin-top: 1px;
+}
+
+.profile-note strong {
+    display: block;
+    color: #253044;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.profile-note p {
+    margin: 0;
+    color: #718096;
+    font-size: 13px;
+}
+
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 850px) {
+
+    .profile-page {
+        padding: 25px 5px 40px;
+    }
+
+    .profile-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .profile-summary {
+        padding: 22px;
+    }
+
+    .academic-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+        .academic-profile-grid > div {
+            border-right: none;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+            .academic-profile-grid > div:last-child {
+                border-bottom: none;
+            }
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-page-header h1 {
+        font-size: 28px;
+    }
+
+    .profile-summary {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .profile-avatar-large {
+        width: 68px;
+        height: 68px;
+        font-size: 27px;
+    }
+
+    .profile-summary-info h2 {
+        font-size: 22px;
+    }
+
+    .profile-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-info-item:nth-child(odd) {
+        border-right: none;
+    }
+
+    .profile-info-item {
+        padding: 16px 20px;
+    }
+
+    .profile-section-header {
+        padding: 17px 20px;
+    }
+}

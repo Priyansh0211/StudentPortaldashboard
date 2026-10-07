@@ -1,113 +1,265 @@
 ﻿@model ignou.Models.User
+
 @{
     ViewData["Title"] = "My Profile";
-
-    Layout = "_StudentLayout";
 }
 
-<div class="container-fluid mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-primary"><i class="bi bi-person-lines-fill me-2"></i> Student Profile</h3>
-    </div>
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/profile.css"
+          asp-append-version="true" />
+}
 
-    <div class="row">
-        <!-- Basic Info Card -->
-        <div class="col-md-8 mb-4">
-            <div class="card shadow-sm border-0">
-                <div class="card-body text-center">
-                    <i class="bi bi-person-circle text-secondary" style="font-size: 5rem;"></i>
-                    <h4 class="mt-3 fw-bold">@Model.FullName</h4>
-                    <p class="text-muted mb-1">@Model.ProgramName (@Model.ProgramType)</p>
-                    <span class="badge bg-success px-3 py-2 mt-2">Active Student</span>
-                </div>
-            </div>
+<div class="profile-page">
+
+    <!-- PAGE HEADER -->
+    <div class="profile-page-header">
+
+        <div>
+            <span class="profile-kicker">
+                <i class="fa-regular fa-user"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>My Profile</h1>
+
+            <p>
+                View your personal and registered student information.
+            </p>
         </div>
 
-        <!-- Right Side: Detailed Info -->
-        <div class="col-md-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary border-bottom fw-bold text-white">
-                    <i class="bi bi-info-circle me-1"></i> Personal Details
-                </div>
-                <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Email ID:</div>
-                        <div class="col-sm-8 fw-semibold">@Model.Email</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Mobile Number:</div>
-                        <div class="col-sm-8 fw-semibold">@Model.MobileNo</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Father's Name:</div>
-                        <div class="col-sm-8 fw-semibold  text-capitalize">@Model.FatherName</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Date of Birth:</div>
-                        <div class="col-sm-8 fw-semibold">
-                            @(Model.DOB != DateTime.MinValue ? Model.DOB.ToString("dd-MMM-yyyy") : "N/A")
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Gender:</div>
-                        <div class="col-sm-8 fw-semibold  text-capitalize">@Model.Gender</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Aadhaar Number:</div>
-                        <div class="col-sm-8 fw-semibold  text-capitalize">@Model.AadhaarNo</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Marital Status:</div>
-                        <div class="col-sm-8 fw-semibold  text-capitalize">@Model.MaritalStatus</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">Personal Personal Disability:</div>
-                        <div class="col-sm-8 fw-semibold  text-capitalize">@Model.PersonalDisability</div>
-                    </div>
-                </div>
+        <div class="profile-status">
+            <i class="fa-solid fa-circle-check"></i>
+            Active Student
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE SUMMARY -->
+    <div class="profile-summary">
+
+        <div class="profile-avatar-large">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div class="profile-summary-info">
+
+            <span>STUDENT</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                @Model.ProgramName
+
+                @if (!string.IsNullOrWhiteSpace(Model.ProgramType))
+                {
+                    <span> • @Model.ProgramType</span>
+                }
+            </p>
+
+            <div class="profile-summary-email">
+                <i class="fa-regular fa-envelope"></i>
+                @Model.Email
             </div>
 
-            <!-- Address Card -->
-            <div class="card shadow-sm border-0 mt-4">
-                <div class="card-header bg-primary border-bottom fw-bold text-white">
-                    <i class="bi bi-geo-alt me-1"></i> Address Details
-                </div>
-                <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">House No:</div>
-                        <div class="col-sm-8 fw-semibold  text-capitalize">
-                            @Model.House
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">City:</div>
-                        <div class="col-sm-8 fw-semibold text-capitalize">
-                            @Model.City
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">District:</div>
-                        <div class="col-sm-8 fw-semibold text-capitalize">
+        </div>
 
-                            @Model.District
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">State:</div>
-                        <div class="col-sm-8 fw-semibold text-capitalize">
-                            @Model.State
-                        </div>
-                    </div>
+    </div>
 
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-muted">PinCode:</div>
-                        <div class="col-sm-8 fw-semibold text-capitalize">
-                            @Model.Pincode
-                        </div>
-                    </div>
 
-                </div>
+    <!-- PERSONAL INFORMATION -->
+    <div class="profile-section">
+
+        <div class="profile-section-header">
+
+            <div class="section-icon blue">
+                <i class="fa-solid fa-user"></i>
             </div>
+
+            <div>
+                <h3>Personal Information</h3>
+                <p>Your registered personal details</p>
+            </div>
+
+        </div>
+
+
+        <div class="profile-info-grid">
+
+            <div class="profile-info-item">
+                <span>Full Name</span>
+                <strong>@Model.FullName</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Father's Name</span>
+                <strong>@Model.FatherName</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Email Address</span>
+                <strong>@Model.Email</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Adhaar Number</span>
+                <strong>@Model.AadhaarNo</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Mobile Number</span>
+                <strong>@Model.MobileNo</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Date of Birth</span>
+                <strong>
+                    @(Model.DOB != DateTime.MinValue
+                        ? Model.DOB.ToString("dd MMM yyyy")
+                        : "Not Available")
+                </strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Gender</span>
+                <strong>@Model.Gender</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Category</span>
+                <strong>@Model.Category</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Blood Group</span>
+                <strong>@Model.BloodGroup</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Marital Status</span>
+                <strong>@Model.MaritalStatus</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>Personal Disability</span>
+                <strong>
+                    @(!string.IsNullOrWhiteSpace(Model.PersonalDisability)
+                        ? Model.PersonalDisability
+                        : "Not Specified")
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADDRESS -->
+    <div class="profile-section">
+
+        <div class="profile-section-header">
+
+            <div class="section-icon green">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div>
+                <h3>Address Details</h3>
+                <p>Your registered communication address</p>
+            </div>
+
+        </div>
+
+
+        <div class="profile-info-grid">
+
+            <div class="profile-info-item">
+                <span>House / Address</span>
+                <strong>@Model.House</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>City</span>
+                <strong>@Model.City</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>District</span>
+                <strong>@Model.District</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>State</span>
+                <strong>@Model.State</strong>
+            </div>
+
+            <div class="profile-info-item">
+                <span>PIN Code</span>
+                <strong>@Model.Pincode</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACADEMIC INFORMATION -->
+    <div class="profile-section">
+
+        <div class="profile-section-header">
+
+            <div class="section-icon purple">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h3>Academic Information</h3>
+                <p>Your registered academic details</p>
+            </div>
+
+        </div>
+
+
+        <div class="academic-profile-grid">
+
+            <div>
+                <span>Program Type</span>
+                <strong>@Model.ProgramType</strong>
+            </div>
+
+            <div>
+                <span>Program Name</span>
+                <strong>@Model.ProgramName</strong>
+            </div>
+
+            <div>
+                <span>Student Status</span>
+                <strong class="active-text">
+                    <i class="fa-solid fa-circle"></i>
+                    Active
+                </strong>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- INFORMATION NOTE -->
+    <div class="profile-note">
+
+        <div class="note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+            <strong>Profile Information</strong>
+
+            <p>
+                The information displayed here is based on the details
+                provided during registration.
+            </p>
         </div>
     </div>
 </div>

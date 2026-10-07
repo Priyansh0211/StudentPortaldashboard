@@ -1,0 +1,335 @@
+﻿/* =========================================
+   STUDENT DASHBOARD
+   ========================================= */
+
+
+/* PAGE HEADER */
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+    .dashboard-header h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 700;
+        color: #20242a;
+    }
+
+    .dashboard-header p {
+        margin: 0;
+        color: #747b85;
+        font-size: 14px;
+    }
+
+
+.academic-session {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 10px 15px;
+    border-radius: 9px;
+    color: #666;
+    font-size: 13px;
+}
+
+    .academic-session i {
+        color: #176ff5;
+    }
+
+
+/* =========================================
+   WELCOME CARD
+   ========================================= */
+
+.dashboard-welcome {
+    background: linear-gradient( 135deg, #176ff5, #4d8df5 );
+    border-radius: 16px;
+    padding: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    overflow: hidden;
+}
+
+.welcome-small {
+    font-size: 13px;
+    opacity: .9;
+}
+
+.dashboard-welcome h2 {
+    margin: 8px 0;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.dashboard-welcome p {
+    margin: 0;
+    max-width: 600px;
+    font-size: 14px;
+    opacity: .9;
+}
+
+.welcome-icon {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+
+/* =========================================
+   SECTION TITLE
+   ========================================= */
+
+.dashboard-section-title {
+    margin-bottom: 17px;
+}
+
+    .dashboard-section-title h3 {
+        margin: 0 0 4px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .dashboard-section-title p {
+        margin: 0;
+        color: #777;
+        font-size: 13px;
+    }
+
+.quick-title {
+    margin-top: 35px;
+}
+
+.academic-title {
+    margin-top: 35px;
+}
+
+
+/* =========================================
+   OVERVIEW CARDS
+   ========================================= */
+
+.overview-card {
+    background: #ffffff;
+    border: 1px solid #e6e9ee;
+    border-radius: 13px;
+    padding: 20px;
+    min-height: 105px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: .2s;
+}
+
+    .overview-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 22px rgba(0,0,0,.06);
+    }
+
+    .overview-card span {
+        display: block;
+        color: #777;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .overview-card h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #252a31;
+        word-break: break-word;
+    }
+
+
+/* Overview Icons */
+
+.overview-icon {
+    min-width: 50px;
+    height: 50px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+    .overview-icon.blue {
+        background: #eaf2ff;
+        color: #176ff5;
+    }
+
+    .overview-icon.purple {
+        background: #f0ebff;
+        color: #7654d8;
+    }
+
+    .overview-icon.green {
+        background: #e7f8ef;
+        color: #20a35a;
+    }
+
+
+/* =========================================
+   QUICK ACTIONS
+   ========================================= */
+
+.quick-action-card {
+    min-height: 100px;
+    background: #ffffff;
+    border: 1px solid #e6e9ee;
+    border-radius: 13px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: #222;
+    transition: .2s;
+}
+
+    .quick-action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 22px rgba(0,0,0,.06);
+        color: #176ff5;
+    }
+
+.quick-action-icon {
+    min-width: 47px;
+    height: 47px;
+    border-radius: 10px;
+    background: #eef4ff;
+    color: #176ff5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.quick-action-content {
+    min-width: 0;
+}
+
+    .quick-action-content h4 {
+        margin: 0 0 4px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .quick-action-content p {
+        margin: 0;
+        color: #777;
+        font-size: 12px;
+    }
+
+.action-arrow {
+    margin-left: auto;
+    color: #9aa0a8;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   ACADEMIC INFORMATION
+   ========================================= */
+
+.academic-card {
+    background: #ffffff;
+    border: 1px solid #e6e9ee;
+    border-radius: 13px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.academic-item {
+    flex: 1;
+    padding: 0 15px;
+}
+
+    .academic-item:first-child {
+        padding-left: 0;
+    }
+
+    .academic-item:last-child {
+        padding-right: 0;
+    }
+
+    .academic-item span {
+        display: block;
+        color: #777;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .academic-item strong {
+        font-size: 15px;
+        font-weight: 600;
+        color: #252a31;
+    }
+
+.academic-divider {
+    width: 1px;
+    height: 42px;
+    background: #e5e7eb;
+}
+
+.active-status {
+    color: #20a35a !important;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-header {
+        display: block;
+    }
+
+    .academic-session {
+        display: inline-flex;
+        margin-top: 12px;
+    }
+
+    .dashboard-welcome {
+        padding: 24px;
+    }
+
+    .welcome-icon {
+        display: none;
+    }
+
+    .academic-card {
+        display: block;
+    }
+
+    .academic-item {
+        padding: 12px 0;
+    }
+
+        .academic-item:first-child {
+            padding-top: 0;
+        }
+
+    .academic-divider {
+        width: 100%;
+        height: 1px;
+    }
+}
+ 
