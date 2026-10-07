@@ -1,18 +1,13 @@
 ﻿using ignou.Data;
-using ignou.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using System.Security.Claims;
 
 namespace ignou.Controllers
 {
-
-    [Authorize(Roles = "Student")]
+    [Authorize]
     public class StudentDashboardController : Controller
     {
-
         private readonly AppDbContext _db;
 
         public StudentDashboardController(AppDbContext db)
@@ -22,35 +17,56 @@ namespace ignou.Controllers
 
         public IActionResult Dashboard()
         {
-            return View();
-        }
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
 
+            var student = _db.Users.FirstOrDefault(
+                u => u.Id.ToString() == userId
+            );
 
-        [HttpGet]
-        public async Task<IActionResult> Profile()
-        {
-            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (int.TryParse(userIdString, out int userId))
+            if (student == null)
             {
-                var studentDetails = await _db.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
-                if (studentDetails == null)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-
-                return View(studentDetails);
+                return RedirectToAction("Login", "Account");
             }
 
-
-            return View();
+            return View(student);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Profile()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
+
+            var student = _db.Users.FirstOrDefault(
+                u => u.Id.ToString() == userId
+            );
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
+        }
+
+        public IActionResult Program()
+        {
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
+
+            var student = _db.Users.FirstOrDefault(
+                u => u.Id.ToString() == userId
+            );
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
         }
     }
 }
