@@ -1,0 +1,216 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "My Program";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/program.css"
+          asp-append-version="true" />
+}
+
+<div class="program-page">
+
+    <!-- PAGE HEADER -->
+
+    <div class="program-page-header">
+
+        <div>
+            <span class="program-kicker">
+                <i class="fa-solid fa-graduation-cap"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>My Program</h1>
+
+            <p>
+                View your registered academic program details.
+            </p>
+        </div>
+
+        <div class="program-status">
+            <i class="fa-solid fa-circle-check"></i>
+            Active
+        </div>
+
+    </div>
+
+
+    <!-- PROGRAM MAIN CARD -->
+
+    <div class="program-main-card">
+
+        <div class="program-main-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+
+        <div class="program-main-info">
+
+            <span>REGISTERED PROGRAM</span>
+
+            <h2>
+                @Model.ProgramName
+            </h2>
+
+            <p>
+                <i class="fa-solid fa-book-open"></i>
+
+                @Model.ProgramType
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRAM DETAILS -->
+
+    <div class="program-section">
+
+        <div class="program-section-header">
+
+            <div class="program-section-icon blue">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+
+            <div>
+                <h3>Program Details</h3>
+
+                <p>
+                    Your registered academic information
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="program-details-grid">
+
+            <div class="program-detail-item">
+
+                <span>Program Name</span>
+
+                <strong>
+                    @Model.ProgramName
+                </strong>
+
+            </div>
+
+
+            <div class="program-detail-item">
+
+                <span>Program Type</span>
+
+                <strong>
+                    @Model.ProgramType
+                </strong>
+
+            </div>
+
+
+            <div class="program-detail-item">
+
+                <span>Student Name</span>
+
+                <strong>
+                    @Model.FullName
+                </strong>
+
+            </div>
+
+
+            <div class="program-detail-item">
+
+                <span>Email Address</span>
+
+                <strong>
+                    @Model.Email
+                </strong>
+
+            </div>
+
+
+            <div class="program-detail-item">
+
+                <span>Student Status</span>
+
+                <strong class="active-text">
+                    <i class="fa-solid fa-circle"></i>
+                    Active
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACADEMIC INFORMATION -->
+
+    <div class="program-section">
+
+        <div class="program-section-header">
+
+            <div class="program-section-icon purple">
+                <i class="fa-solid fa-book"></i>
+            </div>
+
+            <div>
+                <h3>Academic Information</h3>
+
+                <p>
+                    Basic information about your academic journey
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="academic-info-box">
+
+            <div class="academic-info-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+
+                <h3>
+                    @Model.ProgramName
+                </h3>
+
+                <p>
+                    You are currently registered as an active
+                    student in this program.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION NOTE -->
+
+    <div class="program-note">
+
+        <div class="program-note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+
+            <strong>Program Information</strong>
+
+            <p>
+                The information displayed on this page is based
+                on your registration details.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,346 +1,366 @@
-﻿@{
-    ViewData["Title"] = "Student Dashboard";
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="simple-dashboard">
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/dashboard.css"
+          asp-append-version="true" />
+}
 
-    <!-- ================= HEADER ================= -->
 
-    <header class="simple-dashboard-header">
+<!-- PAGE HEADER -->
 
-        <div class="simple-brand">
+<div class="dashboard-header">
 
-            <div class="simple-brand-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
+    <div>
+        <h1>Dashboard</h1>
+
+        <p>
+            Welcome back, @Model.FullName!
+            Here's your academic overview.
+        </p>
+    </div>
+
+    <div class="academic-session">
+
+        <i class="fa-regular fa-calendar"></i>
+
+        <span>
+            Academic Session 2026
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- WELCOME CARD -->
+
+<div class="dashboard-welcome">
+
+    <div class="welcome-content">
+
+        <span class="welcome-small">
+            Welcome back 👋
+        </span>
+
+        <h2>
+            Hello, @Model.FullName!
+        </h2>
+
+        <p>
+            Manage your student profile and academic activities
+            from your student dashboard.
+        </p>
+
+    </div>
+
+    <div class="welcome-icon">
+
+        <i class="fa-solid fa-graduation-cap"></i>
+
+    </div>
+
+</div>
+
+
+<!-- OVERVIEW -->
+
+<div class="dashboard-section-title">
+
+    <div>
+
+        <h3>
+            Overview
+        </h3>
+
+        <p>
+            Your current student information
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="row g-4">
+
+
+    <!-- Student -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="overview-card">
+
+            <div class="overview-icon blue">
+
+                <i class="fa-solid fa-user"></i>
+
             </div>
 
             <div>
-                <strong>Student Portal</strong>
-                <span>IGNOU</span>
+
+                <span>
+                    Student Name
+                </span>
+
+                <h4>
+                    @Model.FullName
+                </h4>
+
             </div>
 
         </div>
 
-        <div class="simple-header-right">
+    </div>
 
-            <div class="simple-student-info">
 
-                <div class="simple-avatar">
-                    <i class="fa-solid fa-user"></i>
-                </div>
+    <!-- Email -->
 
-                <div>
-                    <strong>Student Name</strong>
-                    <span>Student</span>
-                </div>
+    <div class="col-lg-4 col-md-6">
+
+        <div class="overview-card">
+
+            <div class="overview-icon purple">
+
+                <i class="fa-solid fa-envelope"></i>
 
             </div>
 
-            <form asp-controller="Account"
-                  asp-action="Logout"
-                  method="post">
+            <div>
 
-                @Html.AntiForgeryToken()
+                <span>
+                    Email Address
+                </span>
 
-                <button type="submit"
-                        class="simple-logout"
-                        title="Logout">
+                <h4>
+                    @Model.Email
+                </h4>
 
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
-
-                </button>
-
-            </form>
+            </div>
 
         </div>
 
-    </header>
+    </div>
 
 
-    <!-- ================= BODY ================= -->
+    <!-- Program -->
 
-    <div class="simple-dashboard-body">
+    <div class="col-lg-4 col-md-6">
 
+        <div class="overview-card">
 
-        <!-- ================= SIDEBAR ================= -->
+            <div class="overview-icon green">
 
-        <aside class="simple-sidebar">
-
-            <div class="simple-sidebar-title">
-                MAIN MENU
-            </div>
-
-
-            <nav class="simple-sidebar-menu">
-
-                <a href="#"
-                   class="simple-menu-item active">
-
-                    <i class="fa-solid fa-house"></i>
-
-                    <span>Dashboard</span>
-                    @* <span>Dashboard</span> *@
-
-                </a>
-
-
-                <a href="#"
-                   class="simple-menu-item">
-
-                    <i class="fa-regular fa-user"></i>
-
-                    <span>My Profile</span>
-
-                </a>
-
-
-                <a href="#"
-                   class="simple-menu-item">
-
-                    <i class="fa-solid fa-graduation-cap"></i>
-
-                    <span>My Program</span>
-
-                </a>
-
-            </nav>
-
-
-            <div class="simple-sidebar-bottom">
-
-                <form asp-controller="Account"
-                      asp-action="Logout"
-                      method="post">
-
-                    @Html.AntiForgeryToken()
-
-                    <button type="submit"
-                            class="simple-sidebar-logout">
-
-                        <i class="fa-solid fa-right-from-bracket"></i>
-
-                        <span>Logout</span>
-
-                    </button>
-
-                </form>
+                <i class="fa-solid fa-graduation-cap"></i>
 
             </div>
 
-        </aside>
+            <div>
 
+                <span>
+                    Program
+                </span>
 
-        <!-- ================= MAIN CONTENT ================= -->
-
-        <main class="simple-dashboard-content">
-
-
-            <!-- Breadcrumb -->
-
-            <div class="simple-breadcrumb">
-
-                <i class="fa-solid fa-house"></i>
-
-                <span>Home</span>
-
-                <i class="fa-solid fa-chevron-right"></i>
-
-                <strong>Dashboard</strong>
+                <h4>
+                    @Model.ProgramName
+                </h4>
 
             </div>
 
+        </div>
 
-            <!-- Heading -->
+    </div>
 
-            <div class="simple-dashboard-heading">
+</div>
 
-                <div>
 
-                    <h1>Dashboard</h1>
+<!-- QUICK ACTIONS -->
 
-                    <p>
-                        Welcome to your IGNOU student portal.
-                    </p>
+<div class="dashboard-section-title quick-title">
 
-                </div>
+    <div>
+
+        <h3>
+            Quick Actions
+        </h3>
+
+        <p>
+            Access your important student sections
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="row g-4">
+
+
+    <!-- Profile -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <a asp-controller="StudentDashboard"
+           asp-action="Profile"
+           class="quick-action-card">
+
+            <div class="quick-action-icon">
+
+                <i class="fa-regular fa-user"></i>
 
             </div>
 
+            <div class="quick-action-content">
 
-            <!-- Welcome Card -->
+                <h4>
+                    My Profile
+                </h4>
 
-            <section class="simple-welcome-card">
+                <p>
+                    View your personal information
+                </p>
 
-                <div class="simple-welcome-content">
+            </div>
 
-                    <span class="simple-welcome-label">
-                        Welcome back
-                    </span>
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
 
-                    <h2>Hello, Student! 👋</h2>
+        </a>
 
-                    <p>
-                        You can view your student information and
-                        academic programme details from this dashboard.
-                    </p>
+    </div>
 
-                </div>
 
-                <div class="simple-welcome-icon">
+    <!-- Program -->
 
-                    <i class="fa-solid fa-graduation-cap"></i>
+    <div class="col-lg-4 col-md-6">
 
-                </div>
+        <a asp-controller="StudentDashboard"
+           asp-action="Program"
+           class="quick-action-card">
 
-            </section>
+            <div class="quick-action-icon">
 
+                <i class="fa-solid fa-graduation-cap"></i>
 
-            <!-- Student Information -->
+            </div>
 
-            <section class="simple-dashboard-card">
+            <div class="quick-action-content">
 
-                <div class="simple-card-header">
+                <h4>
+                    My Program
+                </h4>
 
-                    <div class="simple-card-icon">
-                        <i class="fa-solid fa-id-card"></i>
-                    </div>
+                <p>
+                    View your academic program
+                </p>
 
-                    <div>
-                        <h2>Student Information</h2>
+            </div>
 
-                        <p>
-                            Your basic student account details
-                        </p>
-                    </div>
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
 
-                </div>
+        </a>
 
+    </div>
 
-                <div class="simple-info-grid">
 
+    <!-- Assignments -->
 
-                    <div class="simple-info-item">
+    <div class="col-lg-4 col-md-6">
 
-                        <span>Application Number</span>
+        <a href="#"
+           class="quick-action-card">
 
-                        <strong>
-                            Not Assigned
-                        </strong>
+            <div class="quick-action-icon">
 
-                    </div>
+                <i class="fa-solid fa-book-open"></i>
 
+            </div>
 
-                    <div class="simple-info-item">
+            <div class="quick-action-content">
 
-                        <span>Enrollment Number</span>
+                <h4>
+                    Assignments
+                </h4>
 
-                        <strong>
-                            Not Assigned
-                        </strong>
+                <p>
+                    Check your assignments
+                </p>
 
-                    </div>
+            </div>
 
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
 
-                    <div class="simple-info-item">
+        </a>
 
-                        <span>Student Name</span>
+    </div>
 
-                        <strong>
-                            Student Name
-                        </strong>
+</div>
 
-                    </div>
 
+<!-- BASIC ACADEMIC INFORMATION -->
 
-                    <div class="simple-info-item">
+<div class="dashboard-section-title academic-title">
 
-                        <span>Account Status</span>
+    <div>
 
-                        <strong class="status-active">
-                            Active
-                        </strong>
+        <h3>
+            Academic Information
+        </h3>
 
-                    </div>
+        <p>
+            Your registered academic details
+        </p>
 
-                </div>
+    </div>
 
-            </section>
+</div>
 
 
-            <!-- Programme Information -->
+<div class="academic-card">
 
-            <section class="simple-dashboard-card">
+    <div class="academic-item">
 
-                <div class="simple-card-header">
+        <span>
+            Program Type
+        </span>
 
-                    <div class="simple-card-icon program-icon">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
+        <strong>
+            @Model.ProgramType
+        </strong>
 
-                    <div>
-                        <h2>My Program</h2>
+    </div>
 
-                        <p>
-                            Your registered academic programme
-                        </p>
-                    </div>
 
-                </div>
+    <div class="academic-divider"></div>
 
 
-                <div class="simple-program-box">
+    <div class="academic-item">
 
-                    <div class="simple-program-main">
+        <span>
+            Program Name
+        </span>
 
-                        <span>PROGRAMME NAME</span>
+        <strong>
+            @Model.ProgramName
+        </strong>
 
-                        <h3>
-                            Your Programme
-                        </h3>
+    </div>
 
-                    </div>
+    <div class="academic-divider"></div>
 
 
-                    <div class="simple-program-type">
+    <div class="academic-item">
 
-                        <span>PROGRAMME TYPE</span>
+        <span>
+            Student Status
+        </span>
 
-                        <strong>
-                            Not Available
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- Getting Started -->
-
-            <section class="simple-dashboard-card simple-help-card">
-
-                <div class="simple-help-icon">
-                    <i class="fa-solid fa-circle-info"></i>
-                </div>
-
-                <div>
-
-                    <h3>Getting Started</h3>
-
-                    <p>
-                        Your student account has been created successfully.
-                        Application and enrollment details will be available
-                        once they are assigned by the university.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-        </main>
+        <strong class="active-status">
+            Active
+        </strong>
 
     </div>
 
