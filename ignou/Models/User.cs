@@ -52,5 +52,17 @@ namespace ignou.Models
         public string? EnrollmentNumber { get; set; }
 
         public string Role { get; set; } = "Student";
+
+
+        //Admin Fields 
+
+        public string? EmployeeId { get; set; }
+
+        public string? Department { get; set; }
+
+        public string? Designation {  get; set; }
+
+        public bool IsActive { get; set; } = true;
+
     }
 }
