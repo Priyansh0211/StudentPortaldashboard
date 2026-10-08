@@ -1,0 +1,107 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Assignments";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/Assignment.css"
+          asp-append-version="true" />
+}
+
+<div class="assignments-page">
+
+    <div class="assignments-page-header">
+        <div>
+            <span class="assignments-kicker">
+                <i class="fa-solid fa-book-open"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>Assignments</h1>
+
+            <p>
+                View and manage your academic assignments.
+            </p>
+        </div>
+
+        <div class="assignment-status">
+            <i class="fa-solid fa-circle-check"></i>
+            Academic
+        </div>
+    </div>
+
+
+    <div class="assignment-info-card">
+
+        <div class="assignment-info-icon">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div class="assignment-info-content">
+            <span>STUDENT</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-graduation-cap"></i>
+                @Model.ProgramName
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="assignment-section">
+
+        <div class="assignment-section-header">
+
+            <div class="assignment-section-icon">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <div>
+                <h3>My Assignments</h3>
+                <p>Your assigned academic work will appear here.</p>
+            </div>
+
+        </div>
+
+
+        <div class="assignment-empty-state">
+
+            <div class="empty-assignment-icon">
+                <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+
+            <h3>No Assignments Available</h3>
+
+            <p>
+                There are currently no assignments available
+                for your registered program.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="assignment-note">
+
+        <div class="assignment-note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+            <strong>Assignment Information</strong>
+
+            <p>
+                New assignments will be displayed here when they
+                are published for your program.
+            </p>
+        </div>
+
+    </div>
+
+</div>

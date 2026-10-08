@@ -1,11 +1,12 @@
 ﻿using ignou.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace ignou.Controllers
 {
-    [Authorize(Roles = "Student")]
+    [Authorize(Roles ="Student")]
     public class StudentDashboardController : Controller
     {
         private readonly AppDbContext _db;
@@ -15,15 +16,19 @@ namespace ignou.Controllers
             _db = db;
         }
 
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
             var userId = User.FindFirstValue(
                 ClaimTypes.NameIdentifier
             );
 
-            var student = _db.Users.FirstOrDefault(
-                u => u.Id.ToString() == userId
-            );
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
 
             if (student == null)
             {
@@ -33,15 +38,20 @@ namespace ignou.Controllers
             return View(student);
         }
 
-        public IActionResult Profile()
+
+        public async Task<IActionResult> Profile()
         {
             var userId = User.FindFirstValue(
                 ClaimTypes.NameIdentifier
             );
 
-            var student = _db.Users.FirstOrDefault(
-                u => u.Id.ToString() == userId
-            );
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
 
             if (student == null)
             {
@@ -51,15 +61,131 @@ namespace ignou.Controllers
             return View(student);
         }
 
-        public IActionResult Program()
+
+        public async Task<IActionResult> Program()
         {
             var userId = User.FindFirstValue(
                 ClaimTypes.NameIdentifier
             );
 
-            var student = _db.Users.FirstOrDefault(
-                u => u.Id.ToString() == userId
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
+        }
+
+
+        public async Task<IActionResult> Assignments()
+        {
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
             );
+
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
+        }
+
+        public async Task<IActionResult> Examination()
+        {
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
+
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
+        }
+
+        public async Task<IActionResult> Results()
+        {
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
+
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
+        }
+
+        public async Task<IActionResult> Certificates()
+        {
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
+
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (student == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(student);
+        }
+
+        public async Task<IActionResult> Payments()
+        {
+            var userId = User.FindFirstValue(
+                ClaimTypes.NameIdentifier
+            );
+
+            if (!int.TryParse(userId, out int id))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = await _db.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
 
             if (student == null)
             {

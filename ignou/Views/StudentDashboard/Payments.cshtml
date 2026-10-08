@@ -1,0 +1,194 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Payments";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/payments.css"
+          asp-append-version="true" />
+}
+
+<div class="payments-page">
+
+    <!-- Page Header -->
+    <div class="payments-page-header">
+
+        <div>
+            <span class="payments-kicker">
+                <i class="fa-solid fa-credit-card"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>Payments</h1>
+
+            <p>
+                Manage your academic fees and payment information.
+            </p>
+        </div>
+
+        <div class="payments-status">
+            <i class="fa-solid fa-shield-halved"></i>
+            Secure Payments
+        </div>
+
+    </div>
+
+
+    <!-- Student Information -->
+    <div class="payments-student-card">
+
+        <div class="payments-student-icon">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div class="payments-student-info">
+
+            <span>STUDENT</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-graduation-cap"></i>
+                @Model.ProgramName
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Current Fee -->
+    <div class="payment-fee-card">
+
+        <div class="payment-fee-content">
+
+            <span class="payment-label">
+                CURRENT PAYABLE AMOUNT
+            </span>
+
+            <h2>₹ 0.00</h2>
+
+            <p>
+                No pending fee payment is currently available.
+            </p>
+
+        </div>
+
+        <div class="payment-fee-icon">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+        </div>
+
+    </div>
+
+
+    <!-- Payment Information -->
+    <div class="payments-section">
+
+        <div class="payments-section-header">
+
+            <div class="payments-section-icon">
+                <i class="fa-solid fa-file-invoice"></i>
+            </div>
+
+            <div>
+                <h3>Payment Information</h3>
+
+                <p>
+                    Your fee and payment details will appear here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="payment-info-grid">
+
+            <div class="payment-info-item">
+                <span>Fee Type</span>
+                <strong>Not Available</strong>
+            </div>
+
+            <div class="payment-info-item">
+                <span>Amount</span>
+                <strong>₹ 0.00</strong>
+            </div>
+
+            <div class="payment-info-item">
+                <span>Payment Status</span>
+
+                <strong class="payment-pending">
+                    <i class="fa-solid fa-clock"></i>
+                    No Pending Payment
+                </strong>
+            </div>
+
+            <div class="payment-info-item">
+                <span>Payment Date</span>
+                <strong>Not Available</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Transaction History -->
+    <div class="payments-section">
+
+        <div class="payments-section-header">
+
+            <div class="payments-section-icon purple">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+
+            <div>
+                <h3>Transaction History</h3>
+
+                <p>
+                    Your completed payment transactions will appear here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="payment-empty-state">
+
+            <div class="empty-payment-icon">
+                <i class="fa-solid fa-receipt"></i>
+            </div>
+
+            <h3>No Transactions Found</h3>
+
+            <p>
+                Your payment transaction history will be displayed
+                here after a successful payment.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Payment Security -->
+    <div class="payment-security-note">
+
+        <div class="payment-security-icon">
+            <i class="fa-solid fa-lock"></i>
+        </div>
+
+        <div>
+            <strong>Secure Payment Information</strong>
+
+            <p>
+                Payment transactions are processed through a secure
+                payment gateway. Transaction details and receipts
+                will be available after successful payment.
+            </p>
+        </div>
+
+    </div>
+
+</div>

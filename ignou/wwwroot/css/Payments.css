@@ -1,0 +1,333 @@
+﻿.payments-page {
+    padding: 35px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Header */
+
+.payments-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.payments-kicker {
+    color: #176ff5;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+    .payments-kicker i {
+        margin-right: 6px;
+    }
+
+.payments-page-header h1 {
+    margin: 8px 0 5px;
+    font-size: 34px;
+    font-weight: 700;
+    color: #182338;
+}
+
+.payments-page-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.payments-status {
+    background: #eef9f3;
+    color: #18864b;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+    .payments-status i {
+        margin-right: 6px;
+    }
+
+
+/* Student Card */
+
+.payments-student-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 18px rgba(25, 40, 65, 0.05);
+}
+
+.payments-student-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    background: #eef5ff;
+    color: #176ff5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.payments-student-info span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8a94a6;
+    letter-spacing: 1px;
+}
+
+.payments-student-info h2 {
+    margin: 4px 0;
+    font-size: 22px;
+    color: #182338;
+}
+
+.payments-student-info p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* Current Fee */
+
+.payment-fee-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 18px rgba(25, 40, 65, 0.05);
+}
+
+.payment-label {
+    color: #8a94a6;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.payment-fee-content h2 {
+    margin: 7px 0;
+    color: #182338;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.payment-fee-content p {
+    margin: 0;
+    color: #6f7b8d;
+    font-size: 14px;
+}
+
+.payment-fee-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    background: #eef9f3;
+    color: #18864b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+
+/* Section */
+
+.payments-section {
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 18px rgba(25, 40, 65, 0.05);
+}
+
+.payments-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.payments-section-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #f1f5ff;
+    color: #176ff5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+    .payments-section-icon.purple {
+        background: #f4f0ff;
+        color: #7456d8;
+    }
+
+.payments-section-header h3 {
+    margin: 0 0 4px;
+    font-size: 19px;
+    color: #182338;
+}
+
+.payments-section-header p {
+    margin: 0;
+    color: #7a8495;
+    font-size: 14px;
+}
+
+
+/* Payment Information */
+
+.payment-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-top: 25px;
+}
+
+.payment-info-item {
+    background: #f8fafc;
+    border: 1px solid #edf0f5;
+    border-radius: 12px;
+    padding: 17px 18px;
+}
+
+    .payment-info-item span {
+        display: block;
+        color: #7a8495;
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+
+    .payment-info-item strong {
+        color: #263247;
+        font-size: 15px;
+    }
+
+.payment-pending {
+    color: #c77b00 !important;
+}
+
+    .payment-pending i {
+        margin-right: 5px;
+    }
+
+
+/* Empty State */
+
+.payment-empty-state {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.empty-payment-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #f4f6f9;
+    color: #7b8798;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.payment-empty-state h3 {
+    margin-bottom: 8px;
+    color: #273247;
+    font-size: 20px;
+}
+
+.payment-empty-state p {
+    max-width: 500px;
+    margin: 0 auto;
+    color: #7a8495;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Security Note */
+
+.payment-security-note {
+    background: #f5f9ff;
+    border: 1px solid #dceaff;
+    border-radius: 12px;
+    padding: 17px 20px;
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+}
+
+.payment-security-icon {
+    color: #176ff5;
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+.payment-security-note strong {
+    color: #26344a;
+    font-size: 14px;
+}
+
+.payment-security-note p {
+    margin: 4px 0 0;
+    color: #6f7b8d;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .payments-page {
+        padding: 25px 18px;
+    }
+
+    .payments-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+        .payments-page-header h1 {
+            font-size: 28px;
+        }
+
+    .payment-fee-card {
+        padding: 20px;
+    }
+
+    .payment-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .payments-section {
+        padding: 18px;
+    }
+
+    .payment-empty-state {
+        padding: 40px 15px;
+    }
+}
