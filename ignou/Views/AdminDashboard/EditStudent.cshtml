@@ -1,0 +1,459 @@
+﻿@model ignou.Models.EditStudentViewModel
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<link rel="stylesheet" href="~/css/Admin/AdminStudentsEdit.css" />
+
+<div class="edit-student-page">
+
+    <div class="edit-student-header">
+
+        <div>
+            <div class="edit-breadcrumb">
+                Admin Dashboard
+                <span>/</span>
+                Students
+                <span>/</span>
+                Edit Student
+            </div>
+
+            <h1>Edit Student</h1>
+
+            <p>
+                Update student information and account status.
+            </p>
+        </div>
+
+        <a asp-action="StudentDetails"
+           asp-route-id="@Model.Id"
+           class="edit-back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Details
+        </a>
+
+    </div>
+
+
+    <form asp-controller="AdminDashboard"
+          asp-action="EditStudent"
+          asp-route-id="@Model.Id"
+          method="post"
+          class="student-edit-form">
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="Id" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="edit-validation-summary">
+        </div>
+
+
+        <!-- PERSONAL INFORMATION -->
+        <section class="edit-card">
+
+            <div class="edit-card-header">
+
+                <div class="edit-section-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <h2>Personal Information</h2>
+                    <p>Basic information of the student.</p>
+                </div>
+
+            </div>
+
+
+            <div class="edit-form-grid">
+
+                <div class="edit-field">
+                    <label asp-for="FullName">Full Name</label>
+
+                    <input asp-for="FullName"
+                           class="edit-input"
+                           placeholder="Enter full name" />
+
+                    <span asp-validation-for="FullName"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="FatherName">Father's Name</label>
+
+                    <input asp-for="FatherName"
+                           class="edit-input"
+                           placeholder="Enter father's name" />
+
+                    <span asp-validation-for="FatherName"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="DOB">Date of Birth</label>
+
+                    <input asp-for="DOB"
+                           type="date"
+                           class="edit-input" />
+
+                    <span asp-validation-for="DOB"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="Gender">Gender</label>
+
+                    <input asp-for="Gender"
+                           class="edit-input"
+                           placeholder="Enter gender" />
+
+                    <span asp-validation-for="Gender"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="Category">Category</label>
+
+                    <input asp-for="Category"
+                           class="edit-input"
+                           placeholder="Enter category" />
+
+                    <span asp-validation-for="Category"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="BloodGroup">Blood Group</label>
+
+                    <input asp-for="BloodGroup"
+                           class="edit-input"
+                           placeholder="Enter blood group" />
+
+                    <span asp-validation-for="BloodGroup"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="MaritalStatus">Marital Status</label>
+
+                    <input asp-for="MaritalStatus"
+                           class="edit-input"
+                           placeholder="Enter marital status" />
+
+                    <span asp-validation-for="MaritalStatus"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="PersonalDisability">
+                        Personal Disability
+                    </label>
+
+                    <input asp-for="PersonalDisability"
+                           class="edit-input"
+                           placeholder="Enter disability status" />
+
+                    <span asp-validation-for="PersonalDisability"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field edit-full-width">
+                    <label asp-for="AadhaarNo">Aadhaar Number</label>
+
+                    <input asp-for="AadhaarNo"
+                           class="edit-input"
+                           maxlength="12"
+                           inputmode="numeric"
+                           placeholder="Enter 12-digit Aadhaar number" />
+
+                    <span asp-validation-for="AadhaarNo"
+                          class="edit-error">
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT INFORMATION -->
+        <section class="edit-card">
+
+            <div class="edit-card-header">
+
+                <div class="edit-section-icon">
+                    <i class="fa-solid fa-address-book"></i>
+                </div>
+
+                <div>
+                    <h2>Contact Information</h2>
+                    <p>Student email and mobile details.</p>
+                </div>
+
+            </div>
+
+
+            <div class="edit-form-grid">
+
+                <div class="edit-field">
+                    <label asp-for="Email">Email Address</label>
+
+                    <input asp-for="Email"
+                           type="email"
+                           class="edit-input"
+                           placeholder="Enter email address" />
+
+                    <span asp-validation-for="Email"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="MobileNo">Mobile Number</label>
+
+                    <input asp-for="MobileNo"
+                           class="edit-input"
+                           maxlength="10"
+                           inputmode="numeric"
+                           placeholder="Enter mobile number" />
+
+                    <span asp-validation-for="MobileNo"
+                          class="edit-error">
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADDRESS -->
+        <section class="edit-card">
+
+            <div class="edit-card-header">
+
+                <div class="edit-section-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+                    <h2>Address</h2>
+                    <p>Student residential address.</p>
+                </div>
+
+            </div>
+
+
+            <div class="edit-form-grid">
+
+                <div class="edit-field edit-full-width">
+                    <label asp-for="House">House / Street Address</label>
+
+                    <input asp-for="House"
+                           class="edit-input"
+                           placeholder="Enter house / street address" />
+
+                    <span asp-validation-for="House"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="City">City</label>
+
+                    <input asp-for="City"
+                           class="edit-input"
+                           placeholder="Enter city" />
+
+                    <span asp-validation-for="City"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="District">District</label>
+
+                    <input asp-for="District"
+                           class="edit-input"
+                           placeholder="Enter district" />
+
+                    <span asp-validation-for="District"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="State">State</label>
+
+                    <input asp-for="State"
+                           class="edit-input"
+                           placeholder="Enter state" />
+
+                    <span asp-validation-for="State"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="Pincode">Pincode</label>
+
+                    <input asp-for="Pincode"
+                           class="edit-input"
+                           maxlength="6"
+                           inputmode="numeric"
+                           placeholder="Enter 6-digit pincode" />
+
+                    <span asp-validation-for="Pincode"
+                          class="edit-error">
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROGRAM -->
+        <section class="edit-card">
+
+            <div class="edit-card-header">
+
+                <div class="edit-section-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h2>Programme Information</h2>
+                    <p>Student programme details.</p>
+                </div>
+
+            </div>
+
+
+            <div class="edit-form-grid">
+
+                <div class="edit-field">
+                    <label asp-for="ProgramType">Program Type</label>
+
+                    <input asp-for="ProgramType"
+                           class="edit-input"
+                           placeholder="Enter program type" />
+
+                    <span asp-validation-for="ProgramType"
+                          class="edit-error">
+                    </span>
+                </div>
+
+
+                <div class="edit-field">
+                    <label asp-for="ProgramName">Program Name</label>
+
+                    <input asp-for="ProgramName"
+                           class="edit-input"
+                           placeholder="Enter program name" />
+
+                    <span asp-validation-for="ProgramName"
+                          class="edit-error">
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNT STATUS -->
+        <section class="edit-card status-card">
+
+            <div class="edit-card-header">
+
+                <div class="edit-section-icon status-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+                    <h2>Account Status</h2>
+                    <p>Control whether this student account is active.</p>
+                </div>
+
+            </div>
+
+
+            <div class="active-status-row">
+
+                <div class="active-status-info">
+
+                    <strong>Student Account</strong>
+
+                    <span>
+                        Inactive students will not have an active account.
+                    </span>
+
+                </div>
+
+
+                <label class="active-toggle">
+
+                    <input asp-for="IsActive"
+                           type="checkbox" />
+
+                    <span class="active-slider"></span>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTIONS -->
+        <div class="edit-form-actions">
+
+            <a asp-action="StudentDetails"
+               asp-route-id="@Model.Id"
+               class="edit-cancel-btn">
+                Cancel
+            </a>
+
+            <button type="submit"
+                    class="edit-save-btn">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Update Student
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
