@@ -1,0 +1,393 @@
+﻿/* =========================================
+   STUDENT PORTAL LAYOUT
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f7fb;
+    color: #20242a;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   TOP NAVBAR
+   ========================================= */
+
+.student-navbar {
+    height: 72px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+}
+
+
+/* Brand */
+
+.student-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #176ff5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+.student-brand h5 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.student-brand span {
+    display: block;
+    color: #888;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+
+/* Navbar Right */
+
+.student-navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+
+/* Notification */
+
+.notification-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #f6f7f9;
+    border-radius: 9px;
+    color: #555;
+    cursor: pointer;
+}
+
+    .notification-btn:hover {
+        background: #edf3ff;
+        color: #176ff5;
+    }
+
+.notification-dot {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Navbar Student */
+
+.navbar-student {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #eaf2ff;
+    color: #176ff5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-student-info strong {
+    display: block;
+    font-size: 13px;
+}
+
+.navbar-student-info span {
+    display: block;
+    color: #888;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   MAIN AREA
+   ========================================= */
+
+.student-main {
+    display: flex;
+    min-height: calc(100vh - 72px - 55px);
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.student-sidebar {
+    width: 245px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+
+/* Sidebar Student */
+
+.sidebar-student {
+    padding: 20px 17px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.sidebar-avatar {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: #eaf2ff;
+    color: #176ff5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-student strong {
+    display: block;
+    font-size: 13px;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-student span {
+    display: block;
+    color: #20a35a;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+
+/* Sidebar Heading */
+
+.sidebar-heading {
+    padding: 18px 18px 7px;
+    color: #999;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.support-heading {
+    margin-top: 8px;
+}
+
+
+/* Menu */
+
+.student-menu {
+    padding: 4px 10px;
+}
+
+.student-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    color: #626975;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all .2s ease;
+}
+
+    .student-menu-link i {
+        width: 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .student-menu-link:hover {
+        background: #f0f5ff;
+        color: #176ff5;
+    }
+
+
+    /* Active Menu */
+
+    .student-menu-link.active {
+        background: #eaf2ff;
+        color: #176ff5;
+        font-weight: 600;
+    }
+
+
+/* Logout */
+
+.sidebar-logout {
+    margin-top: auto;
+    padding: 13px 10px;
+    border-top: 1px solid #edf0f3;
+}
+
+    .sidebar-logout form {
+        margin: 0;
+    }
+
+.logout-button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    border-radius: 8px;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 13px;
+    text-align: left;
+}
+
+    .logout-button:hover {
+        background: #fff1f2;
+    }
+
+
+/* =========================================
+   PAGE CONTENT
+   ========================================= */
+
+.student-content {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.student-footer {
+    height: 55px;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+    .student-sidebar {
+        width: 210px;
+    }
+
+    .student-content {
+        padding: 22px;
+    }
+
+    .student-navbar {
+        padding: 0 18px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .student-navbar {
+        height: auto;
+        min-height: 68px;
+        padding: 12px 15px;
+    }
+
+    .student-brand span {
+        display: none;
+    }
+
+    .student-navbar-right {
+        gap: 10px;
+    }
+
+    .navbar-student-info {
+        display: none;
+    }
+
+    .student-main {
+        display: block;
+    }
+
+    .student-sidebar {
+        width: 100%;
+    }
+
+    .student-menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .student-menu-link {
+        margin: 2px;
+    }
+
+    .sidebar-logout {
+        margin-top: 5px;
+    }
+
+    .student-content {
+        padding: 18px;
+    }
+
+    .student-footer {
+        height: auto;
+        padding: 14px;
+        display: block;
+        text-align: center;
+    }
+
+        .student-footer span {
+            display: block;
+            margin: 3px 0;
+        }
+}
