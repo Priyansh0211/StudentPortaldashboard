@@ -1,0 +1,173 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Examination";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/examination.css"
+          asp-append-version="true" />
+}
+
+<div class="examination-page">
+
+    <!-- Page Header -->
+    <div class="examination-page-header">
+
+        <div>
+            <span class="examination-kicker">
+                <i class="fa-solid fa-file-pen"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>Examination</h1>
+
+            <p>
+                View your examination information and schedule.
+            </p>
+        </div>
+
+        <div class="examination-status">
+            <i class="fa-solid fa-circle-check"></i>
+            Academic
+        </div>
+
+    </div>
+
+
+    <!-- Student Information -->
+    <div class="examination-student-card">
+
+        <div class="examination-student-icon">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div class="examination-student-info">
+
+            <span>STUDENT</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-graduation-cap"></i>
+                @Model.ProgramName
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Examination Overview -->
+    <div class="examination-section">
+
+        <div class="examination-section-header">
+
+            <div class="examination-section-icon">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <div>
+                <h3>Examination Information</h3>
+
+                <p>
+                    Your examination details will be displayed here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="examination-info-grid">
+
+            <div class="examination-info-item">
+                <span>Examination Session</span>
+                <strong>Not Available</strong>
+            </div>
+
+            <div class="examination-info-item">
+                <span>Examination Status</span>
+
+                <strong class="status-pending">
+                    <i class="fa-solid fa-clock"></i>
+                    Not Scheduled
+                </strong>
+            </div>
+
+            <div class="examination-info-item">
+                <span>Program</span>
+                <strong>@Model.ProgramName</strong>
+            </div>
+
+            <div class="examination-info-item">
+                <span>Student Status</span>
+
+                <strong class="status-active">
+                    <i class="fa-solid fa-circle"></i>
+                    Active
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Exam Schedule -->
+    <div class="examination-section">
+
+        <div class="examination-section-header">
+
+            <div class="examination-section-icon purple">
+                <i class="fa-solid fa-calendar-check"></i>
+            </div>
+
+            <div>
+                <h3>Examination Schedule</h3>
+
+                <p>
+                    Your upcoming examination schedule will appear here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="examination-empty-state">
+
+            <div class="empty-examination-icon">
+                <i class="fa-solid fa-calendar-xmark"></i>
+            </div>
+
+            <h3>No Examination Schedule Available</h3>
+
+            <p>
+                No examination schedule has been published
+                for your program yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Information Note -->
+    <div class="examination-note">
+
+        <div class="examination-note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+            <strong>Examination Information</strong>
+
+            <p>
+                Examination schedules and related information
+                will be displayed here once published by the university.
+            </p>
+        </div>
+
+    </div>
+
+</div>
