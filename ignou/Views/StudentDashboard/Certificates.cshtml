@@ -1,0 +1,114 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Certificates";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/Certificate.css"
+          asp-append-version="true" />
+}
+
+<div class="certificates-page">
+
+    <div class="certificates-page-header">
+
+        <div>
+            <span class="certificates-kicker">
+                <i class="fa-solid fa-certificate"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>Certificates</h1>
+
+            <p>
+                View your academic certificates and documents.
+            </p>
+        </div>
+
+        <div class="certificates-status">
+            <i class="fa-solid fa-certificate"></i>
+            Academic
+        </div>
+
+    </div>
+
+
+    <div class="certificates-student-card">
+
+        <div class="certificates-student-icon">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div class="certificates-student-info">
+
+            <span>STUDENT</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-graduation-cap"></i>
+                @Model.ProgramName
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="certificates-section">
+
+        <div class="certificates-section-header">
+
+            <div class="certificates-section-icon">
+                <i class="fa-solid fa-file-circle-check"></i>
+            </div>
+
+            <div>
+                <h3>My Certificates</h3>
+
+                <p>
+                    Your available academic certificates will appear here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="certificates-empty-state">
+
+            <div class="empty-certificates-icon">
+                <i class="fa-solid fa-certificate"></i>
+            </div>
+
+            <h3>No Certificates Available</h3>
+
+            <p>
+                No academic certificates are currently available
+                for your student account.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="certificates-note">
+
+        <div class="certificates-note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+            <strong>Certificate Information</strong>
+
+            <p>
+                Your certificates will be displayed here once
+                they are issued and published by the university.
+            </p>
+        </div>
+
+    </div>
+
+</div>

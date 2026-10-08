@@ -1,0 +1,173 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/Result.css"
+          asp-append-version="true" />
+}
+
+<div class="results-page">
+
+    <!-- Page Header -->
+    <div class="results-page-header">
+
+        <div>
+            <span class="results-kicker">
+                <i class="fa-solid fa-chart-column"></i>
+                STUDENT PORTAL
+            </span>
+
+            <h1>Results</h1>
+
+            <p>
+                View your academic examination results.
+            </p>
+        </div>
+
+        <div class="results-status">
+            <i class="fa-solid fa-chart-line"></i>
+            Academic
+        </div>
+
+    </div>
+
+
+    <!-- Student Information -->
+    <div class="results-student-card">
+
+        <div class="results-student-icon">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div class="results-student-info">
+
+            <span>STUDENT</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-graduation-cap"></i>
+                @Model.ProgramName
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Result Overview -->
+    <div class="results-section">
+
+        <div class="results-section-header">
+
+            <div class="results-section-icon">
+                <i class="fa-solid fa-file-circle-check"></i>
+            </div>
+
+            <div>
+                <h3>Academic Results</h3>
+
+                <p>
+                    Your examination results will be displayed here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="results-info-grid">
+
+            <div class="results-info-item">
+                <span>Program</span>
+                <strong>@Model.ProgramName</strong>
+            </div>
+
+            <div class="results-info-item">
+                <span>Result Status</span>
+
+                <strong class="result-pending">
+                    <i class="fa-solid fa-clock"></i>
+                    Not Available
+                </strong>
+            </div>
+
+            <div class="results-info-item">
+                <span>Latest Examination</span>
+                <strong>Not Available</strong>
+            </div>
+
+            <div class="results-info-item">
+                <span>Student Status</span>
+
+                <strong class="result-active">
+                    <i class="fa-solid fa-circle"></i>
+                    Active
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Latest Result -->
+    <div class="results-section">
+
+        <div class="results-section-header">
+
+            <div class="results-section-icon purple">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h3>Latest Result</h3>
+
+                <p>
+                    Your latest examination result will appear here.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="results-empty-state">
+
+            <div class="empty-results-icon">
+                <i class="fa-solid fa-file-circle-xmark"></i>
+            </div>
+
+            <h3>No Result Available</h3>
+
+            <p>
+                No examination result has been published
+                for your program yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Information Note -->
+    <div class="results-note">
+
+        <div class="results-note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+            <strong>Result Information</strong>
+
+            <p>
+                Your examination results will be displayed here
+                once they are officially published by the university.
+            </p>
+        </div>
+
+    </div>
+
+</div>
