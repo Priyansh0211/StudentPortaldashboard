@@ -31,7 +31,7 @@
         
 
         <!-- VALIDATION SUMMARY -->
-        <div asp-validation-summary="All" class="validation-summary" role="alert"></div>
+        <div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div>
 
         <!-- REGISTRATION FORM -->
         <form asp-action="AdminRegister" asp-controller="Account" method="post" class="registration-form">
@@ -259,9 +259,9 @@
                             <div class="input-wrapper password-wrapper">
                                 <i class="fa-solid fa-lock"></i>
                                 <input asp-for="Password" type="password" id="passwordField" class="form-control-custom" placeholder="Create a password" autocomplete="new-password" />
-                                <button type="button" class="password-toggle" onclick="togglePassword('passwordField', this)" aria-label="Show password">
+                                @* <button type="button" class="password-toggle" onclick="togglePassword('passwordField', this)" aria-label="Show password">
                                     <i class="fa-regular fa-eye"></i>
-                                </button>
+                                </button> *@
                             </div>
                             <span asp-validation-for="Password" class="field-validation"></span>
                             <small class="field-hint">Password must meet the minimum security requirements.</small>

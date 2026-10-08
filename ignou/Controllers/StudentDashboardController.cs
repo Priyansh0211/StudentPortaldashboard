@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace ignou.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Student")]
     public class StudentDashboardController : Controller
     {
         private readonly AppDbContext _db;
