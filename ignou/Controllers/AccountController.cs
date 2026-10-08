@@ -91,6 +91,84 @@ namespace ignou.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> AdminRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminRegister(AdminRegisterViewModel model)
+            {
+            if (ModelState.IsValid)
+            {
+                
+                if (_db.Users.Any(u => u.Email == model.Email || u.AadhaarNo == model.AadhaarNo))
+                {
+                    ModelState.AddModelError("", "Email, Aadhaar already exist");
+                    return View(model);
+                }
+
+                //Auto Generate employee id
+                string newEmployeeId = "EMP-101";
+
+                var lastAdmin = _db.Users.Where(u => u.Role == "Admin" && u.EmployeeId != null && u.EmployeeId.StartsWith("EMP-"))
+                    .OrderByDescending(u => u.Id).FirstOrDefault();
+
+                if(lastAdmin != null)
+                {
+                    string lastNumberStr = lastAdmin.EmployeeId.Replace("EMP-", "");
+                    if(int.TryParse(lastNumberStr , out int lastNumber))
+                    {
+                        newEmployeeId = "EMP-" + (lastNumber + 1);
+                    }
+                }
+
+
+                var adminUser = new User
+                {
+                    Role = "Admin", 
+                    IsActive = true,
+
+                    
+                    FullName = model.FullName,
+                    Email = model.Email,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),
+
+                    
+                    EmployeeId = newEmployeeId,
+                    Department = model.Department,
+                    Designation = model.Designation,
+
+                    
+                    MobileNo = model.MobileNo,
+                    FatherName = model.FatherName,
+                    DOB = model.DOB,
+                    Gender = model.Gender,
+                    BloodGroup = model.BloodGroup,
+                    MaritalStatus = model.MaritalStatus,
+                    AadhaarNo = model.AadhaarNo,
+
+                    
+                    House = model.House,
+                    City = model.City,
+                    District = model.District,
+                    State = model.State,
+                    Pincode = model.Pincode
+
+                    
+                };
+
+                _db.Users.Add(adminUser);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Login", "Account");
+            }
+            return View(model);
+        }
+
         // LOGIN 
 
         [HttpGet]
@@ -145,7 +223,7 @@ namespace ignou.Controllers
             if (user.Role == "Admin")
             {
                 // Agar Admin dashboard banaya hai, toh uska Action aur Controller name yahan daalein
-                return RedirectToAction("Index", "AdminDashboard");
+                return RedirectToAction("Dashboard", "AdminDashboard");
             }
 
             // Default Student ke liye
