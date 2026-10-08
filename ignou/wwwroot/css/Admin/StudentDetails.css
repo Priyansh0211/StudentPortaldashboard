@@ -1,0 +1,765 @@
+﻿/* =========================================================
+   STUDENT DETAILS - PREMIUM ADMIN UI
+   ========================================================= */
+
+.student-details-page {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 35px 25px 60px;
+    color: #172033;
+}
+
+
+/* =========================================================
+   TOP HEADER
+   ========================================================= */
+
+.details-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 28px;
+}
+
+.details-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.details-heading-icon {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: linear-gradient( 135deg, #2563eb, #4f46e5 );
+    color: #fff;
+    font-size: 23px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, .20);
+}
+
+.details-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    color: #2563eb;
+    margin-bottom: 5px;
+}
+
+.details-heading h1 {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #111827;
+}
+
+.details-heading p {
+    margin: 6px 0 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.details-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.details-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 44px;
+    padding: 0 17px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+    .details-btn:hover {
+        transform: translateY(-2px);
+    }
+
+.details-btn-primary {
+    color: #fff;
+    background: linear-gradient( 135deg, #2563eb, #4f46e5 );
+    box-shadow: 0 8px 20px rgba(37, 99, 235, .20);
+}
+
+    .details-btn-primary:hover {
+        color: #fff;
+        box-shadow: 0 12px 28px rgba(37, 99, 235, .30);
+    }
+
+.details-btn-light {
+    color: #374151;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+}
+
+    .details-btn-light:hover {
+        color: #111827;
+        background: #f8fafc;
+    }
+
+
+/* =========================================================
+   PROFILE CARD
+   ========================================================= */
+
+.student-profile-card {
+    position: relative;
+    padding: 28px;
+    margin-bottom: 22px;
+    border: 1px solid #e8edf5;
+    border-radius: 18px;
+    background: linear-gradient( 135deg, #ffffff 0%, #f8fbff 100% );
+    box-shadow: 0 12px 35px rgba(15, 23, 42, .07);
+}
+
+.profile-main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.student-avatar {
+    width: 78px;
+    height: 78px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient( 135deg, #2563eb, #6366f1 );
+    color: #fff;
+    font-size: 29px;
+    font-weight: 800;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, .25);
+}
+
+.profile-info {
+    min-width: 0;
+}
+
+.profile-name-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+    .profile-name-row h2 {
+        margin: 0;
+        font-size: 23px;
+        font-weight: 800;
+        color: #111827;
+    }
+
+.profile-role {
+    margin: 6px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.profile-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+    .profile-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .profile-meta i {
+        color: #2563eb;
+    }
+
+    .profile-meta strong {
+        color: #334155;
+    }
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+    .status-badge i {
+        font-size: 6px;
+    }
+
+.status-active {
+    color: #047857;
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+}
+
+.status-inactive {
+    color: #b91c1c;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+}
+
+
+/* =========================================================
+   DETAIL CARD
+   ========================================================= */
+
+.details-card {
+    margin-bottom: 22px;
+    overflow: hidden;
+    border: 1px solid #e8edf5;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, .055);
+}
+
+.details-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 21px 25px;
+    border-bottom: 1px solid #edf1f6;
+    background: #fbfcfe;
+}
+
+    .details-card-header h2 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 800;
+        color: #172033;
+    }
+
+    .details-card-header p {
+        margin: 4px 0 0;
+        color: #8290a3;
+        font-size: 12px;
+    }
+
+.section-icon {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 17px;
+}
+
+    .section-icon.blue {
+        color: #2563eb;
+        background: #eff6ff;
+    }
+
+    .section-icon.green {
+        color: #059669;
+        background: #ecfdf5;
+    }
+
+    .section-icon.orange {
+        color: #ea580c;
+        background: #fff7ed;
+    }
+
+    .section-icon.purple {
+        color: #7c3aed;
+        background: #f5f3ff;
+    }
+
+    .section-icon.cyan {
+        color: #0891b2;
+        background: #ecfeff;
+    }
+
+
+/* =========================================================
+   DETAILS GRID
+   ========================================================= */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 4px 25px 10px;
+}
+
+.detail-item {
+    min-width: 0;
+    padding: 18px 10px;
+    border-bottom: 1px solid #f0f2f6;
+}
+
+    .detail-item:nth-last-child(-n + 2) {
+        border-bottom: none;
+    }
+
+.detail-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #8a96a8;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+.detail-value {
+    display: block;
+    color: #273449;
+    font-size: 14px;
+    font-weight: 650;
+    word-break: break-word;
+}
+
+.detail-item-full {
+    grid-column: 1 / -1;
+}
+
+.detail-inline-icon {
+    margin-right: 7px;
+    color: #64748b;
+}
+
+.aadhaar-value {
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   MINI STATUS
+   ========================================================= */
+
+.mini-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+    .mini-status.active {
+        color: #047857;
+        background: #ecfdf5;
+    }
+
+    .mini-status.inactive {
+        color: #b91c1c;
+        background: #fef2f2;
+    }
+
+
+/* =========================================================
+   PROGRAMME
+   ========================================================= */
+
+.programme-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: 23px 25px 26px;
+}
+
+.programme-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 19px;
+    border: 1px solid #e8edf5;
+    border-radius: 14px;
+    background: #fafcff;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+    .programme-box:hover {
+        transform: translateY(-2px);
+        border-color: #d8e3f4;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, .06);
+    }
+
+.programme-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: #7c3aed;
+    background: #f3e8ff;
+    font-size: 17px;
+}
+
+.programme-box span {
+    display: block;
+    margin-bottom: 5px;
+    color: #8a96a8;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+}
+
+.programme-box strong {
+    display: block;
+    color: #273449;
+    font-size: 14px;
+    font-weight: 750;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   BOTTOM ACTIONS
+   ========================================================= */
+
+.details-bottom-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .details-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .details-actions {
+        width: 100%;
+    }
+
+        .details-actions .details-btn {
+            flex: 1;
+        }
+
+    .programme-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .student-details-page {
+        padding: 22px 14px 45px;
+    }
+
+    .details-heading {
+        align-items: flex-start;
+    }
+
+    .details-heading-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 13px;
+        font-size: 19px;
+    }
+
+    .details-heading h1 {
+        font-size: 24px;
+    }
+
+    .details-heading p {
+        font-size: 12px;
+    }
+
+    .student-profile-card {
+        padding: 20px;
+    }
+
+    .profile-main {
+        align-items: flex-start;
+    }
+
+    .student-avatar {
+        width: 62px;
+        height: 62px;
+        border-radius: 16px;
+        font-size: 23px;
+    }
+
+    .profile-name-row h2 {
+        font-size: 19px;
+    }
+
+    .profile-meta {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .details-card-header {
+        padding: 18px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        padding: 4px 18px 10px;
+    }
+
+    .detail-item {
+        padding: 15px 5px;
+    }
+
+        .detail-item:nth-last-child(-n + 2) {
+            border-bottom: 1px solid #f0f2f6;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+    .detail-item-full {
+        grid-column: auto;
+    }
+
+    .programme-content {
+        padding: 18px;
+    }
+
+    .details-bottom-actions {
+        flex-direction: column;
+    }
+
+        .details-bottom-actions .details-btn {
+            width: 100%;
+        }
+}
+
+
+@media (max-width: 430px) {
+
+    .details-actions {
+        flex-direction: column;
+    }
+
+        .details-actions .details-btn {
+            width: 100%;
+        }
+
+    .profile-main {
+        flex-direction: column;
+    }
+
+    .profile-name-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+}
+/* =========================================================
+   DELETE BUTTON - STUDENT TABLE
+   ========================================================= */
+
+.delete-student-form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.delete-student-btn {
+    width: 38px;
+    height: 38px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    margin: 0;
+    border: 1px solid #fecaca !important;
+    border-radius: 9px !important;
+    color: #dc2626 !important;
+    background: #fff5f5 !important;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+    .delete-student-btn i {
+        display: block;
+        font-size: 14px;
+        line-height: 1;
+    }
+
+    .delete-student-btn:hover {
+        color: #fff !important;
+        background: #dc2626 !important;
+        border-color: #dc2626 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 16px rgba(220, 38, 38, .22);
+    }
+
+    .delete-student-btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    .delete-student-btn:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, .14) !important;
+    }
+
+/* =========================================================
+   SWEETALERT PREMIUM DELETE BUTTONS
+   ========================================================= */
+
+.premium-delete-popup {
+    width: 430px !important;
+    max-width: calc(100% - 30px) !important;
+    border-radius: 20px !important;
+    padding: 30px 28px 25px !important;
+    box-shadow: 0 25px 70px rgba(15, 23, 42, .20) !important;
+}
+
+.premium-delete-title {
+    margin-top: 5px !important;
+    color: #111827 !important;
+    font-size: 23px !important;
+    font-weight: 800 !important;
+}
+
+.premium-delete-text {
+    color: #64748b !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+}
+
+
+/* =========================================================
+   SWEETALERT BUTTON CONTAINER
+   ========================================================= */
+
+.premium-delete-popup .swal2-actions {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px !important;
+    margin-top: 20px !important;
+}
+
+
+/* =========================================================
+   YES DELETE
+   ========================================================= */
+
+.premium-delete-confirm {
+    min-width: 125px !important;
+    height: 42px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px !important;
+    padding: 0 17px !important;
+    border: none !important;
+    border-radius: 9px !important;
+    color: #fff !important;
+    background: #dc2626 !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    box-shadow: 0 7px 17px rgba(220, 38, 38, .22) !important;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease !important;
+}
+
+    .premium-delete-confirm:hover {
+        color: #fff !important;
+        background: #b91c1c !important;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 23px rgba(220, 38, 38, .28) !important;
+    }
+
+    .premium-delete-confirm:active {
+        transform: translateY(0);
+    }
+
+
+/* =========================================================
+   CANCEL
+   ========================================================= */
+
+.premium-delete-cancel {
+    min-width: 105px !important;
+    height: 42px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px !important;
+    padding: 0 17px !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 9px !important;
+    color: #374151 !important;
+    background: #f8fafc !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease !important;
+}
+
+    .premium-delete-cancel:hover {
+        color: #111827 !important;
+        background: #f1f5f9 !important;
+        border-color: #d1d5db !important;
+        transform: translateY(-2px);
+    }
+
+    .premium-delete-cancel:active {
+        transform: translateY(0);
+    }
+
+
+/* =========================================================
+   SWEETALERT WARNING ICON
+   ========================================================= */
+
+.premium-delete-popup .swal2-icon.swal2-warning {
+    width: 70px !important;
+    height: 70px !important;
+    margin: 5px auto 15px !important;
+    border-width: 3px !important;
+}
