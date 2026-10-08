@@ -1,1 +1,389 @@
-﻿
+﻿@model IEnumerable<ignou.Models.User>
+
+@{
+    ViewData["Title"] = "All Students";
+    // Layout = "_AdminLayout";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/Admin/AdminStudentsGet.css"
+          asp-append-version="true" />
+}
+
+<div class="students-page">
+
+    <div class="students-container">
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+        <div class="students-page-header">
+
+            <div class="page-heading-content">
+
+                <span class="page-kicker">
+                    <i class="fa-solid fa-users-gear"></i>
+                    ADMIN DASHBOARD
+                </span>
+
+                <h1>Manage Students</h1>
+
+                <p>
+                    View, edit, and manage all registered students
+                    in the VNOU system.
+                </p>
+
+            </div>
+
+            <div class="page-heading-action">
+
+                <a href="@Url.Action("AddStudent", "AdminDashboard")"
+                   class="add-student-btn">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <span>Add New Student</span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             STUDENT DATABASE CARD
+        ========================== -->
+        <section class="student-database-card">
+
+            <!-- Card Header -->
+            <div class="student-card-header">
+
+                <div class="student-card-icon">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+
+                <div>
+                    <h2>Student Database</h2>
+
+                    <p>
+                        Complete list of enrolled students
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Table -->
+            <div class="student-table-wrapper">
+
+                <table class="student-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="serial-column">
+                                S.NO
+                            </th>
+
+                            <th>
+                                STUDENT INFO
+                            </th>
+
+                            <th>
+                                CONTACT DETAILS
+                            </th>
+
+                            <th>
+                                PROGRAMME
+                            </th>
+
+                            <th>
+                                STATUS
+                            </th>
+
+                            <th class="actions-column">
+                                ACTIONS
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @if (Model != null && Model.Any())
+                        {
+                            int serialNo = 1;
+
+                            foreach (var student in Model)
+                            {
+                                <tr>
+
+                                    <!-- S.NO -->
+                                    <td class="serial-number">
+                                        @serialNo
+                                    </td>
+
+
+                                    <!-- STUDENT INFO -->
+                                    <td>
+
+                                        <div class="student-info">
+
+                                            <div class="student-name">
+                                                @student.FullName
+                                            </div>
+
+                                            <div class="student-id">
+
+                                                <i class="fa-solid fa-id-card"></i>
+
+                                                @student.AadhaarNo
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- CONTACT DETAILS -->
+                                    <td>
+
+                                        <div class="contact-details">
+
+                                            <div class="contact-item">
+
+                                                <i class="fa-regular fa-envelope"></i>
+
+                                                <span>
+                                                    @student.Email
+                                                </span>
+
+                                            </div>
+
+                                            <div class="contact-item">
+
+                                                <i class="fa-solid fa-phone"></i>
+
+                                                <span>
+                                                    @student.MobileNo
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- PROGRAMME -->
+                                    <td>
+
+                                        <div class="programme-info">
+
+                                            <span class="programme-badge">
+                                                @student.ProgramName
+                                            </span>
+
+                                            <span class="programme-type">
+                                                @student.ProgramType
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+                                    <td>
+
+                                        @if (student.IsActive)
+                                        {
+                                            <span class="student-status active">
+
+                                                <i class="fa-solid fa-circle-check"></i>
+
+                                                Active
+
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="student-status inactive">
+
+                                                <i class="fa-solid fa-circle-xmark"></i>
+
+                                                Inactive
+
+                                            </span>
+                                        }
+
+                                    </td>
+
+
+                                    <!-- ACTIONS -->
+                                    <td>
+
+                                        <div class="student-actions">
+
+    <a asp-action="StudentDetails"
+       asp-route-id="@student.Id"
+       class="student-action-btn view-btn"
+       title="View Student">
+
+        <i class="fa-solid fa-eye"></i>
+
+    </a>
+
+
+    <a asp-action="EditStudent"
+       asp-route-id="@student.Id"
+       class="student-action-btn edit-btn"
+       title="Edit Student">
+
+        <i class="fa-solid fa-pen-to-square"></i>
+
+    </a>
+
+
+    <form asp-controller="AdminDashboard"
+          asp-action="DeleteStudent"
+          asp-route-id="@student.Id"
+          method="post"
+          class="delete-student-form">
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit"
+                class="student-action-btn delete-student-btn"
+                data-student-name="@student.FullName"
+                title="Delete Student">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </button>
+
+    </form>
+
+</div>
+                                    </td>
+
+                                </tr>
+
+                                serialNo++;
+                            }
+                        }
+                        else
+                        {
+                            <!-- =========================
+                                 EMPTY STATE
+                            ========================== -->
+
+                            <tr>
+
+                                <td colspan="6">
+
+                                    <div class="students-empty-state">
+
+                                        <div class="empty-icon">
+                                            <i class="fa-solid fa-folder-open"></i>
+                                        </div>
+
+                                        <h3>
+                                            No Students Found
+                                        </h3>
+
+                                        <p>
+                                            There are currently no students
+                                            registered in the system.
+                                        </p>
+
+                                        <a href="@Url.Action("Register", "Account")"
+                                           class="empty-register-btn">
+
+                                            <i class="fa-solid fa-plus"></i>
+
+                                            Register First Student
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                                            <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const deleteForms = document.querySelectorAll(".delete-student-form");
+
+        deleteForms.forEach(function (form) {
+
+            form.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const button = form.querySelector(".delete-student-btn");
+                const studentName = button.dataset.studentName;
+
+                Swal.fire({
+                    title: "Delete Student?",
+                    html: `
+                        Are you sure you want to permanently delete
+                        <strong>${studentName}</strong>?
+                        <br> `,
+                    icon: "warning",
+
+                    showCancelButton: true,
+
+                    confirmButtonText: '<i class="fa-solid fa-trash"></i> Yes, Delete',
+                    cancelButtonText: '<i class="fa-solid fa-xmark"></i> Cancel',
+
+                    reverseButtons: true,
+
+                    focusCancel: true,
+
+                    customClass: {
+                        popup: "premium-delete-popup",
+                        title: "premium-delete-title",
+                        htmlContainer: "premium-delete-text",
+                        confirmButton: "premium-delete-confirm",
+                        cancelButton: "premium-delete-cancel"
+                    },
+
+                    buttonsStyling: false
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+
+                });
+
+            });
+
+        });
+
+    });
+</script>

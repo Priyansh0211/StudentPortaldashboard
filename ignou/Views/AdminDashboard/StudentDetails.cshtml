@@ -1,0 +1,452 @@
+﻿@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<link rel="stylesheet" href="~/css/Admin/studentDetails.css" />
+
+<div class="student-details-page">
+
+    <!-- PAGE HEADER -->
+    <div class="details-topbar">
+
+        <div class="details-heading">
+            <div class="details-heading-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div>
+                <span class="details-kicker">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    ADMINISTRATION
+                </span>
+
+                <h1>Student Details</h1>
+
+                <p>
+                    View complete information and academic details of the registered student.
+                </p>
+            </div>
+        </div>
+
+        <div class="details-actions">
+            <a asp-action="EditStudent"
+               asp-route-id="@Model.Id"
+               class="details-btn details-btn-primary">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit Student
+            </a>
+
+            <a asp-action="GetAllStudents"
+               class="details-btn details-btn-light">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- STUDENT PROFILE CARD -->
+    <section class="student-profile-card">
+
+        <div class="profile-main">
+
+            <div class="student-avatar">
+                <span>
+                    @(string.IsNullOrWhiteSpace(Model.FullName)
+                        ? "S"
+                        : Model.FullName.Substring(0, 1).ToUpper())
+                </span>
+            </div>
+
+            <div class="profile-info">
+
+                <div class="profile-name-row">
+                    <h2>@Model.FullName</h2>
+
+                    @if (Model.IsActive)
+                    {
+                        <span class="status-badge status-active">
+                            <i class="fa-solid fa-circle"></i>
+                            Active
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="status-badge status-inactive">
+                            <i class="fa-solid fa-circle"></i>
+                            Inactive
+                        </span>
+                    }
+                </div>
+
+                <p class="profile-role">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    @Model.Role
+                </p>
+
+                <div class="profile-meta">
+
+                    @if (!string.IsNullOrWhiteSpace(Model.ApplicationNumber))
+                    {
+                        <span>
+                            <i class="fa-solid fa-file-lines"></i>
+                            Application No:
+                            <strong>@Model.ApplicationNumber</strong>
+                        </span>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.EnrollmentNumber))
+                    {
+                        <span>
+                            <i class="fa-solid fa-id-badge"></i>
+                            Enrollment No:
+                            <strong>@Model.EnrollmentNumber</strong>
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PERSONAL DETAILS -->
+    <section class="details-card">
+
+        <div class="details-card-header">
+            <div class="section-icon blue">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+                <h2>Personal Information</h2>
+                <p>Basic personal information of the student</p>
+            </div>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <span class="detail-label">Full Name</span>
+                <span class="detail-value">
+                    @Model.FullName
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Father's Name</span>
+                <span class="detail-value">
+                    @Model.FatherName
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Date of Birth</span>
+                <span class="detail-value">
+                    @Model.DOB.ToString("dd MMMM yyyy")
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Gender</span>
+                <span class="detail-value">
+                    @Model.Gender
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Category</span>
+                <span class="detail-value">
+                    @Model.Category
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Blood Group</span>
+                <span class="detail-value">
+                    @Model.BloodGroup
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Marital Status</span>
+                <span class="detail-value">
+                    @Model.MaritalStatus
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Disability Status</span>
+                <span class="detail-value">
+                    @Model.PersonalDisability
+                </span>
+            </div>
+
+            <div class="detail-item detail-item-full">
+                <span class="detail-label">Aadhaar Number</span>
+                <span class="detail-value aadhaar-value">
+                    @Model.AadhaarNo
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT DETAILS -->
+    <section class="details-card">
+
+        <div class="details-card-header">
+            <div class="section-icon green">
+                <i class="fa-solid fa-address-book"></i>
+            </div>
+
+            <div>
+                <h2>Contact & Login Information</h2>
+                <p>Registered contact details of the student</p>
+            </div>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <span class="detail-label">Email Address</span>
+
+                <span class="detail-value">
+                    <i class="fa-regular fa-envelope detail-inline-icon"></i>
+                    @Model.Email
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Mobile Number</span>
+
+                <span class="detail-value">
+                    <i class="fa-solid fa-phone detail-inline-icon"></i>
+                    @Model.MobileNo
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">User ID</span>
+
+                <span class="detail-value">
+                    #@Model.Id
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Account Status</span>
+
+                <span class="detail-value">
+
+                    @if (Model.IsActive)
+                    {
+                        <span class="mini-status active">
+                            <i class="fa-solid fa-check"></i>
+                            Active Account
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="mini-status inactive">
+                            <i class="fa-solid fa-xmark"></i>
+                            Inactive Account
+                        </span>
+                    }
+
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADDRESS -->
+    <section class="details-card">
+
+        <div class="details-card-header">
+            <div class="section-icon orange">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div>
+                <h2>Address Information</h2>
+                <p>Permanent address details of the student</p>
+            </div>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-item detail-item-full">
+                <span class="detail-label">House / Street Address</span>
+                <span class="detail-value">
+                    @Model.House
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">City</span>
+                <span class="detail-value">
+                    @Model.City
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">District</span>
+                <span class="detail-value">
+                    @Model.District
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">State</span>
+                <span class="detail-value">
+                    @Model.State
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Pincode</span>
+                <span class="detail-value">
+                    @Model.Pincode
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROGRAMME DETAILS -->
+    <section class="details-card programme-card">
+
+        <div class="details-card-header">
+            <div class="section-icon purple">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Programme Information</h2>
+                <p>Academic programme selected by the student</p>
+            </div>
+        </div>
+
+        <div class="programme-content">
+
+            <div class="programme-box">
+
+                <div class="programme-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <div>
+                    <span>Programme Type</span>
+                    <strong>@Model.ProgramType</strong>
+                </div>
+
+            </div>
+
+
+            <div class="programme-box">
+
+                <div class="programme-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div>
+                    <span>Programme Name</span>
+                    <strong>@Model.ProgramName</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    @* <!-- APPLICATION INFORMATION -->
+    <section class="details-card">
+
+        <div class="details-card-header">
+            <div class="section-icon cyan">
+                <i class="fa-solid fa-file-circle-check"></i>
+            </div>
+
+            <div>
+                <h2>Application Information</h2>
+                <p>Registration and admission reference details</p>
+            </div>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <span class="detail-label">Application Number</span>
+
+                <span class="detail-value">
+                    @(string.IsNullOrWhiteSpace(Model.ApplicationNumber)
+                        ? "Not Assigned"
+                        : Model.ApplicationNumber)
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Enrollment Number</span>
+
+                <span class="detail-value">
+                    @(string.IsNullOrWhiteSpace(Model.EnrollmentNumber)
+                        ? "Not Assigned"
+                        : Model.EnrollmentNumber)
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Account Role</span>
+
+                <span class="detail-value">
+                    @Model.Role
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Student ID</span>
+
+                <span class="detail-value">
+                    @Model.Id
+                </span>
+            </div>
+
+        </div>
+
+    </section> *@
+
+
+    <!-- BOTTOM ACTIONS -->
+    <div class="details-bottom-actions">
+
+        <a asp-action="EditStudent"
+           asp-route-id="@Model.Id"
+           class="details-btn details-btn-primary">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Edit Student
+        </a>
+
+        <a asp-action="GetAllStudents"
+           class="details-btn details-btn-light">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Students
+        </a>
+
+    </div>
+
+</div>
