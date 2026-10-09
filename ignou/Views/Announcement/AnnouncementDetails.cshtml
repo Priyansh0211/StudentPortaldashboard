@@ -1,0 +1,149 @@
+﻿
+@model ignou.Models.Announcement
+
+@{
+    ViewData["Title"] = "Announcement Details";
+}
+
+
+<link rel="stylesheet" href="~/css/Admin/AdminStudentRegistration.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Announcement/CreateAnnouncement.css" asp-append-version="true" />
+
+<div class="registration-page announcement-page announcement-details-page">
+    <div class="registration-container announcement-container announcement-details-container">
+
+        <!-- Page Heading -->
+        <div class="announcement-details-heading">
+            <div>
+                <span class="page-kicker">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    NOTICE BOARD
+                </span>
+
+                <h1>Announcement Details</h1>
+                <p>View the complete information about this announcement.</p>
+            </div>
+
+            <a asp-controller="Announcement"
+               asp-action="ManageAnnouncements"
+               class="announcement-details-back">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Announcements
+            </a>
+        </div>
+
+        <!-- Announcement Details Card -->
+        <section class="announcement-details-card">
+
+            <!-- Card Header -->
+            <div class="announcement-details-card-header">
+                <div class="announcement-details-icon">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+
+                <div class="announcement-details-header-text">
+                    <span>ANNOUNCEMENT #@Model.Id</span>
+                    <h2>Notice Information</h2>
+                </div>
+
+                <div class="announcement-details-status">
+                    @if (Model.IsActive)
+                    {
+                        <span class="announcement-status status-active">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Active
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="announcement-status status-inactive">
+                            <i class="fa-solid fa-circle-pause"></i>
+                            Inactive
+                        </span>
+                    }
+                </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="announcement-details-body">
+
+                <div class="announcement-details-category">
+                    <i class="fa-solid fa-tags"></i>
+                    @Model.Category
+                </div>
+
+                <h1 class="announcement-details-title">
+                    @Model.Title
+                </h1>
+
+                <div class="announcement-details-meta">
+                    <div class="announcement-meta-item">
+                        <span class="announcement-meta-icon">
+                            <i class="fa-regular fa-calendar"></i>
+                        </span>
+                        <div>
+                            <small>Published Date</small>
+                            <strong>
+                                @Model.PublishDate.ToString("dd MMMM yyyy")
+                            </strong>
+                        </div>
+                    </div>
+
+                    <div class="announcement-meta-item">
+                        <span class="announcement-meta-icon">
+                            <i class="fa-regular fa-clock"></i>
+                        </span>
+                        <div>
+                            <small>Published Time</small>
+                            <strong>
+                                @Model.PublishDate.ToString("hh:mm tt")
+                            </strong>
+                        </div>
+                    </div>
+
+                    <div class="announcement-meta-item">
+                        <span class="announcement-meta-icon">
+                            <i class="fa-regular fa-user"></i>
+                        </span>
+                        <div>
+                            <small>Posted By</small>
+                            <strong>
+                                @(string.IsNullOrWhiteSpace(Model.PostedBy)
+                                    ? "Admin"
+                                    : Model.PostedBy)
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="announcement-details-divider"></div>
+
+                <div class="announcement-message-section">
+                    <h3>
+                        <i class="fa-solid fa-align-left"></i>
+                        Announcement Message
+                    </h3>
+
+                    <div class="announcement-full-message">@Model.Message</div>
+                </div>
+
+            </div>
+
+            <!-- Card Footer -->
+            <div class="announcement-details-footer">
+                <span>
+                    <i class="fa-solid fa-circle-info"></i>
+                    Announcement ID: @Model.Id
+                </span>
+
+                <a asp-controller="Announcement"
+                   asp-action="ManageAnnouncements"
+                   class="announcement-details-footer-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to List
+                </a>
+            </div>
+
+        </section>
+    </div>
+</div>
