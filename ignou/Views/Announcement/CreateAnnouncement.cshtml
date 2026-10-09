@@ -1,0 +1,203 @@
+﻿
+@model ignou.Models.Announcement
+
+@{
+    ViewData["Title"] = "Publish Announcement";
+}
+
+@* <link rel="stylesheet" href="~/css/Announcement/CreateAnnouncement.css" asp-append-version="true" /> *@
+
+<link rel="stylesheet" href="~/css/Admin/AdminStudentRegistration.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Announcement/CreateAnnouncement.css" asp-append-version="true" />
+
+<div class="registration-page announcement-page">
+    <div class="registration-container announcement-container">
+
+        <!-- PAGE HEADER -->
+        <div class="announcement-heading">
+
+            <div class="announcement-heading-content">
+
+                <span class="announcement-kicker">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    NOTICE BOARD
+                </span>
+
+                <h1>Publish New Announcement</h1>
+
+                <p>
+                    Create an important notice or share an update with students.
+                </p>
+
+            </div>
+
+            <div class="announcement-header-icon">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+        <form asp-controller="Announcement"
+              asp-action="CreateAnnouncement"
+              method="post"
+              class="registration-form">
+
+            @Html.AntiForgeryToken()
+
+            <section class="registration-card">
+
+                <div class="section-header blue-header">
+
+                    <div class="section-icon">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </div>
+
+                    <div>
+                        <h2>Notice Details</h2>
+                        <p>Fill in the required information</p>
+                    </div>
+
+                </div>
+
+                <div class="section-body">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="validation-summary">
+                    </div>
+
+                    <div class="form-grid announcement-fields">
+
+                        <div class="form-field">
+                            <label asp-for="Title">
+                                Notice Title <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-heading"></i>
+
+                                <input asp-for="Title"
+                                       class="form-control-custom"
+                                       placeholder="e.g. End Term Exams Rescheduled" />
+                            </div>
+
+                            <span asp-validation-for="Title"
+                                  class="field-validation"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="Category">
+                                Category <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+                                <i class="fa-solid fa-tags"></i>
+
+                                <select asp-for="Category"
+                                        class="form-control-custom">
+                                    <option value="">Select Category</option>
+                                    <option value="General">General Information</option>
+                                    <option value="Examinations">Examinations</option>
+                                    <option value="Admissions">Admissions & Fees</option>
+                                    <option value="Events">Events & Holidays</option>
+                                </select>
+                            </div>
+
+                            <span asp-validation-for="Category"
+                                  class="field-validation"></span>
+                        </div>
+
+                        <div class="form-field announcement-message-field">
+                            <label asp-for="Message">
+                                Notice Message <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper announcement-textarea-wrapper">
+                                <i class="fa-solid fa-align-left"></i>
+
+                                <textarea asp-for="Message"
+                                          class="form-control-custom announcement-textarea"
+                                          rows="6"
+                                          placeholder="Type the full announcement message here..."></textarea>
+                            </div>
+
+                            <span asp-validation-for="Message"
+                                  class="field-validation"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <div class="registration-actions announcement-actions">
+
+                <a asp-controller="Announcement"
+                   asp-action="ManageAnnouncements"
+                   class="announcement-back-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to List
+                </a>
+
+                <button type="submit" class="register-submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Publish Announcement
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const messageInput =
+                document.getElementById("announcementMessage");
+
+            const characterCount =
+                document.getElementById("announcementCharCount");
+
+            const preview =
+                document.getElementById("announcementPreview");
+
+            if (!messageInput || !characterCount || !preview) {
+                return;
+            }
+
+            function updateAnnouncementPreview() {
+
+                const message = messageInput.value;
+
+                characterCount.textContent = message.length;
+
+                if (message.trim().length === 0) {
+                    preview.textContent =
+                        "Your announcement message will appear here as you type.";
+                    preview.classList.add("preview-empty");
+                } else {
+                    // textContent keeps entered text as text, not HTML.
+                    preview.textContent = message;
+                    preview.classList.remove("preview-empty");
+                }
+            }
+
+            messageInput.addEventListener(
+                "input",
+                updateAnnouncementPreview
+            );
+
+            updateAnnouncementPreview();
+        });
+    </script>
+
+}

@@ -704,3 +704,86 @@
         font-size: 12px;
     }
 }
+
+/* =========================================================
+   ANNOUNCEMENT PAGE
+   Reuses Student Registration styling
+   ========================================================= */
+
+.announcement-page {
+    padding-top: 32px;
+}
+
+.announcement-container {
+    max-width: 900px;
+}
+
+.announcement-fields {
+    grid-template-columns: 1fr;
+}
+
+.announcement-message-wrapper {
+    align-items: flex-start;
+}
+
+.announcement-textarea-wrapper {
+    align-items: flex-start;
+}
+
+    .announcement-textarea-wrapper > i {
+        top: 17px;
+        transform: none;
+    }
+
+.announcement-textarea {
+    height: auto;
+    min-height: 160px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    resize: vertical;
+    line-height: 1.65;
+}
+
+.announcement-actions {
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.announcement-back-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 18px;
+    border: 1px solid #dfe5ed;
+    border-radius: 8px;
+    background: #fff;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .18s ease;
+}
+
+    .announcement-back-btn:hover {
+        border-color: #bfdbfe;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+@media (max-width: 650px) {
+    .announcement-page {
+        padding: 24px 14px 40px;
+    }
+
+    .announcement-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+        .announcement-back-btn,
+        .announcement-actions .register-submit {
+            width: 100%;
+        }
+}

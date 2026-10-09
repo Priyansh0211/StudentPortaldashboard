@@ -1,0 +1,161 @@
+﻿
+@model ignou.Models.Announcement
+
+@{
+    ViewData["Title"] = "Edit Announcement";
+}
+
+<link rel="stylesheet" href="~/css/Admin/AdminStudentRegistration.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Announcement/CreateAnnouncement.css" asp-append-version="true" />
+
+<div class="registration-page announcement-edit-page">
+    <div class="registration-container announcement-edit-container">
+
+        <div class="registration-heading">
+            <span class="page-kicker">ADMIN PANEL</span>
+            <h2>Edit Announcement</h2>
+            <p>Update announcement information below.</p>
+        </div>
+
+        <div class="registration-card announcement-edit-card">
+
+            <div class="section-header blue-header">
+                <div class="section-icon">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div>
+                    <h3>Edit Announcement</h3>
+                    <p>Announcement ID: @Model.Id</p>
+                </div>
+            </div>
+
+            <div class="section-body">
+                <form asp-controller="Announcement"
+                      asp-action="EditAnnouncement"
+                      asp-route-id="@Model.Id"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    
+<div class="form-grid">
+
+    <!-- Announcement ID -->
+    <div class="form-field">
+        <label asp-for="Id">Announcement ID</label>
+        <div class="input-wrapper">
+            <i class="fa-solid fa-hashtag"></i>
+            <input asp-for="Id"
+                   class="form-control-custom readonly-field"
+                   readonly />
+        </div>
+    </div>
+
+    <!-- Publish Date -->
+    <div class="form-field">
+        <label asp-for="PublishDate">Publish Date</label>
+        <div class="input-wrapper">
+            <i class="fa-solid fa-calendar-days"></i>
+            <input asp-for="PublishDate"
+                   type="text"
+                   value="@Model.PublishDate.ToString("dd MMM yyyy, hh:mm tt")"
+                   class="form-control-custom readonly-field"
+                   readonly />
+        </div>
+    </div>
+
+    <!-- Posted By -->
+    <div class="form-field">
+        <label asp-for="PostedBy">Posted By</label>
+        <div class="input-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input asp-for="PostedBy"
+                   class="form-control-custom readonly-field"
+                   value="@Model.PostedBy"
+                   placeholder="Not available"
+                   readonly />
+        </div>
+    </div>
+
+</div>
+
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3"></div>
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label asp-for="Title">Announcement Title</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-heading"></i>
+                                <input asp-for="Title"
+                                       class="form-control-custom"
+                                       placeholder="Enter announcement title" />
+                            </div>
+                            <span asp-validation-for="Title"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="Category">Category</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <input asp-for="Category"
+                                       class="form-control-custom"
+                                       placeholder="Enter category" />
+                            </div>
+                            <span asp-validation-for="Category"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="form-field announcement-edit-message">
+                            <label asp-for="Message">Announcement Message</label>
+                            <textarea asp-for="Message"
+                                      class="form-control-custom"
+                                      rows="7"
+                                      placeholder="Enter announcement details"></textarea>
+                            <span asp-validation-for="Message"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="form-field announcement-edit-status">
+                            <label asp-for="IsActive">Announcement Status</label>
+                            <div class="announcement-edit-status-box">
+                                <input asp-for="IsActive"
+                                       class="form-check-input" />
+                                <label asp-for="IsActive"
+                                       class="mb-0">
+                                    Active
+                                </label>
+                                <span class="announcement-edit-status-hint">
+                                    Checked = Active, unchecked = Inactive
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="registration-actions">
+                        <a asp-controller="Announcement"
+                           asp-action="ManageAnnouncements"
+                           class="announcement-edit-cancel">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Cancel
+                        </a>
+
+                        <button type="submit" class="register-submit">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save Changes
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
