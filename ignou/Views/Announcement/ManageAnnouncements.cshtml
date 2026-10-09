@@ -1,0 +1,295 @@
+﻿
+@model IEnumerable<ignou.Models.Announcement>
+
+@{
+    ViewData["Title"] = "Manage Announcements";
+}
+
+<link rel="stylesheet" href="~/css/Admin/AdminStudentRegistration.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Announcement/CreateAnnouncement.css" asp-append-version="true" />
+
+<div class="registration-page announcement-page announcement-list-page">
+    <div class="registration-container announcement-container announcement-list-container">
+
+        <!-- Page Heading -->
+        <div class="announcement-list-heading">
+            <div>
+                <span class="page-kicker">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    NOTICE BOARD
+                </span>
+
+                <h1>Manage Announcements</h1>
+                <p>View, manage and organize announcements for students.</p>
+            </div>
+
+            <a asp-controller="Announcement"
+               asp-action="CreateAnnouncement"
+               class="announcement-create-btn">
+                <i class="fa-solid fa-plus"></i>
+                Create Announcement
+            </a>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="announcement-stats">
+            <div class="announcement-stat-card">
+                <div class="announcement-stat-icon stat-blue">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div>
+                    <span>Total Announcements</span>
+                    <h3>@(Model?.Count() ?? 0)</h3>
+                </div>
+            </div>
+
+            <div class="announcement-stat-card">
+                <div class="announcement-stat-icon stat-green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <span>Active Notices</span>
+                    <h3>@(Model?.Count(a => a.IsActive) ?? 0)</h3>
+                </div>
+            </div>
+
+            <div class="announcement-stat-card">
+                <div class="announcement-stat-icon stat-orange">
+                    <i class="fa-solid fa-circle-pause"></i>
+                </div>
+                <div>
+                    <span>Inactive Notices</span>
+                    <h3>@(Model?.Count(a => !a.IsActive) ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcement Table -->
+        <section class="registration-card announcement-table-card">
+
+            <div class="section-header blue-header">
+                <div class="section-icon">
+                    <i class="fa-solid fa-list"></i>
+                </div>
+                <div>
+                    <h2>All Announcements</h2>
+                    <p>Search and manage published notices</p>
+                </div>
+            </div>
+
+            <div class="section-body">
+
+                <div class="announcement-toolbar">
+                    <div class="announcement-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text"
+                               id="announcementSearch"
+                               placeholder="Search title, category or message..." />
+                    </div>
+
+                    <select id="announcementStatus"
+                            class="announcement-filter">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+
+                    <select id="announcementCategory"
+                            class="announcement-filter">
+                        <option value="">All Categories</option>
+                        <option value="General">General</option>
+                        <option value="Examinations">Examinations</option>
+                        <option value="Admissions">Admissions</option>
+                        <option value="Events">Events</option>
+                    </select>
+                </div>
+
+                <div class="announcement-table-wrapper">
+                    <table class="announcement-table" id="announcementTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Announcement</th>
+                                <th>Category</th>
+                                <th>Publish Date</th>
+                                <th>Posted By</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model.OrderByDescending(a => a.PublishDate))
+                                {
+                                    <tr data-status="@(item.IsActive ? "active" : "inactive")"
+                                        data-category="@item.Category">
+
+                                        <td class="announcement-id">
+                                            #@item.Id
+                                        </td>
+
+                                        <td class="announcement-info">
+                                            <strong>@item.Title</strong>
+                                            <p>
+                                                @(string.IsNullOrWhiteSpace(item.Message)
+                                                    ? "No message available"
+                                                    : item.Message.Length > 100
+                                                        ? item.Message.Substring(0, 100) + "..."
+                                                        : item.Message)
+                                            </p>
+                                        </td>
+
+                                        <td>
+                                            <span class="announcement-category">
+                                                @item.Category
+                                            </span>
+                                        </td>
+
+                                        <td class="announcement-date">
+                                            @item.PublishDate.ToString("dd MMM yyyy")
+                                            <small>@item.PublishDate.ToString("hh:mm tt")</small>
+                                        </td>
+
+                                        <td>
+                                            @(string.IsNullOrWhiteSpace(item.PostedBy)
+                                                ? "Admin"
+                                                : item.PostedBy)
+                                        </td>
+
+                                        <td>
+                                            @if (item.IsActive)
+                                            {
+                                                <span class="announcement-status status-active">
+                                                    <i class="fa-solid fa-circle-check"></i>
+                                                    Active
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="announcement-status status-inactive">
+                                                    <i class="fa-solid fa-circle-pause"></i>
+                                                    Inactive
+                                                </span>
+                                            }
+                                        </td>
+
+                                        <td>
+                                            <div class="announcement-row-actions">
+
+
+
+                                                 <a asp-action="AnnouncementDetails"
+                                                    asp-controller="Announcement"
+                                                    asp-route-id="@item.Id"
+                                                    class="announcement-action-btn detail-action"
+                                                    title="Show announcement details">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                 </a>
+
+                                                <a asp-controller="Announcement"
+                                                   asp-action="EditAnnouncement"
+                                                   asp-route-id="@item.Id"
+                                                   class="announcement-action-btn edit-action"
+                                                   title="Edit announcement"
+                                                   aria-label="Edit announcement">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+
+                                                
+<form asp-controller="AdminAnnouncement"
+      asp-action="DeleteAnnouncement"
+      asp-route-id="@item.Id"
+      method="post"
+      class="delete-announcement-form"
+      style="display:inline;">
+
+    @Html.AntiForgeryToken()
+
+    <button type="submit"
+            class="announcement-action-btn delete-action"
+            title="Delete announcement">
+        <i class="fa-solid fa-trash"></i>
+    </button>
+</form>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="announcement-empty">
+                                        <i class="fa-regular fa-folder-open"></i>
+                                        <h3>No announcements found</h3>
+                                        <p>Create your first announcement to display it here.</p>
+                                        <a asp-controller="Announcement"
+                                           asp-action="CreateAnnouncement"
+                                           class="announcement-create-btn">
+                                            <i class="fa-solid fa-plus"></i>
+                                            Create Announcement
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="announcementNoResults" class="announcement-no-results" hidden>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <p>No announcements match your search or filters.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (() => {
+            const searchInput = document.getElementById("announcementSearch");
+            const statusFilter = document.getElementById("announcementStatus");
+            const categoryFilter = document.getElementById("announcementCategory");
+            const table = document.getElementById("announcementTable");
+            const noResults = document.getElementById("announcementNoResults");
+
+            if (!searchInput || !statusFilter || !categoryFilter || !table) {
+                return;
+            }
+
+            const rows = Array.from(table.querySelectorAll("tbody tr[data-status]"));
+
+            function filterAnnouncements() {
+                const search = searchInput.value.trim().toLowerCase();
+                const status = statusFilter.value;
+                const category = categoryFilter.value.toLowerCase();
+                let visibleCount = 0;
+
+                rows.forEach(row => {   
+                    const text = row.textContent.toLowerCase();
+                    const matchesSearch = text.includes(search);
+                    const matchesStatus = !status || row.dataset.status === status;
+                    const matchesCategory =
+                        !category || (row.dataset.category || "").toLowerCase() === category;
+
+                    const visible = matchesSearch && matchesStatus && matchesCategory;
+                    row.hidden = !visible;
+
+                    if (visible) visibleCount++;
+                });
+
+                noResults.hidden = visibleCount !== 0 || rows.length === 0;
+            }
+
+            searchInput.addEventListener("input", filterAnnouncements);
+            statusFilter.addEventListener("change", filterAnnouncements);
+            categoryFilter.addEventListener("change", filterAnnouncements);
+        })();
+    </script>
+}
