@@ -1,1 +1,377 @@
-﻿<h1>Hello This is Admin Index</h1>
+﻿
+@model ignou.Models.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<link rel="stylesheet" href="~/css/Admin/AdminDashboard.css"
+      asp-append-version="true" />
+
+<div class="admin-dashboard">
+    <div class="dashboard-container">
+
+        <!-- Page Header -->
+        <header class="dashboard-heading">
+            <div>
+                <span class="dashboard-kicker">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    SYSTEM OVERVIEW
+                </span>
+                <h1>Admin Dashboard</h1>
+                <p>Real-time analytics and statistics of your portal.</p>
+            </div>
+
+            <a asp-controller="Announcement"
+               asp-action="CreateAnnouncement"
+               class="dashboard-header-btn">
+                <i class="fa-solid fa-plus"></i>
+                New Announcement
+            </a>
+        </header>
+
+        <!-- Statistics Cards -->
+        <div class="dashboard-stats">
+
+            <article class="dashboard-stat-card students-stat">
+                <div class="stat-top">
+                    <span class="stat-label">Total Students</span>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+
+                <h2>@Model.TotalStudents</h2>
+
+                <div class="stat-footer">
+                    <span class="stat-positive">
+                        <i class="fa-solid fa-circle-check"></i>
+                        @Model.ActiveStudents Active
+                    </span>
+                    <span class="stat-negative">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        @Model.InactiveStudents Inactive
+                    </span>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card announcements-stat">
+                <div class="stat-top">
+                    <span class="stat-label">Announcements</span>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                </div>
+
+                <h2>@Model.TotalAnnouncements</h2>
+
+                <div class="stat-footer">
+                    <span class="stat-positive">
+                        @Model.ActiveAnnouncements Active
+                    </span>
+                    <span class="stat-muted">
+                        @Model.InactiveAnnouncements Hidden
+                    </span>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card live-stat">
+                <div class="live-stat-content">
+                    <span class="live-stat-label">Live Notices</span>
+                    <h2>@Model.ActiveAnnouncements</h2>
+                    <span class="live-stat-caption">
+                        Currently active announcements
+                    </span>
+                </div>
+
+                <div class="live-stat-icon">
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card shortcut-stat">
+                <div class="live-stat-content">
+                    <span class="live-stat-label">Quick Action</span>
+                    <h3>Create a notice</h3>
+                    <a asp-controller="Announcement"
+                       asp-action="CreateAnnouncement"
+                       class="shortcut-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        New Notice
+                    </a>
+                </div>
+
+                <div class="live-stat-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Dashboard Detail Panels -->
+        <div class="dashboard-panels">
+
+            <!-- Course-wise Strength -->
+            <section class="dashboard-panel">
+                <div class="panel-heading course-heading">
+                    <div class="panel-title-icon">
+                        <i class="fa-solid fa-chart-column"></i>
+                    </div>
+                    <div>
+                        <h3>Course-wise Strength</h3>
+                        <p>Students enrolled by programme</p>
+                    </div>
+                </div>
+
+                <div class="panel-content">
+                    @if (Model.ProgramWiseStudents != null &&
+                         Model.ProgramWiseStudents.Any())
+                    {
+                        <ul class="dashboard-list">
+                            @foreach (var stat in Model.ProgramWiseStudents)
+                            {
+                                <li>
+                                    <span class="list-item-name">@stat.Key</span>
+                                    <span class="course-count">
+                                        @stat.Value Students
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="dashboard-empty">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <p>No course data available.</p>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <!-- Recent Students -->
+            <section class="dashboard-panel">
+                <div class="panel-heading students-heading">
+                    <div class="panel-title-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div>
+                        <h3>New Admissions</h3>
+                        <p>Recently registered students</p>
+                    </div>
+                </div>
+
+                <div class="panel-content">
+                    @if (Model.RecentStudents != null &&
+                         Model.RecentStudents.Any())
+                    {
+                        <ul class="dashboard-list recent-students-list">
+                            @foreach (var student in Model.RecentStudents)
+                            {
+                                <li class="recent-student-item">
+                                    <div class="recent-item-main">
+                                        <span class="recent-item-avatar">
+                                            <i class="fa-solid fa-user-graduate"></i>
+                                        </span>
+
+                                        <div class="recent-item-details">
+                                            <span class="recent-item-name">
+                                                @student.FullName
+                                            </span>
+                                            <span class="recent-item-program">
+                                                <i class="fa-solid fa-graduation-cap"></i>
+                                                @student.ProgramName
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    @if (student.IsActive)
+                                    {
+                                        <span class="student-status-badge active-status">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="student-status-badge inactive-status">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                            Inactive
+                                        </span>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="dashboard-empty">
+                            <i class="fa-solid fa-user-group"></i>
+                            <p>No recent students.</p>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <!-- Recent Announcements -->
+            <section class="dashboard-panel">
+                <div class="panel-heading notices-heading">
+                    <div class="panel-title-icon">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div>
+                        <h3>Latest Notices</h3>
+                        <p>Recently published announcements</p>
+                    </div>
+                </div>
+
+                <div class="panel-content">
+                    @if (Model.RecentAnnouncements != null &&
+                         Model.RecentAnnouncements.Any())
+                    {
+                        <ul class="dashboard-list recent-notices-list">
+                            @foreach (var notice in Model.RecentAnnouncements)
+                            {
+                                <li class="recent-notice-item">
+                                    <div class="notice-title-row">
+                                        <span class="notice-title"
+                                              title="@notice.Title">
+                                            @notice.Title
+                                        </span>
+                                        <i class="fa-solid fa-file-lines notice-file-icon"></i>
+                                    </div>
+
+                                    <div class="notice-meta">
+                                        <span class="notice-category">
+                                            @notice.Category
+                                        </span>
+
+                                        <span class="notice-date">
+                                            <i class="fa-regular fa-calendar"></i>
+                                            @notice.PublishDate.ToString("dd MMM yyyy")
+                                        </span>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="dashboard-empty">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <p>No recent announcements.</p>
+                        </div>
+                    }
+                </div>
+            </section>
+
+        </div>
+
+        
+<!-- RECENT LOGIN ACTIVITY -->
+<div class="recent-login-section">
+    <section class="recent-login-card">
+
+        <div class="recent-login-header">
+            <div class="recent-login-heading">
+                <div class="recent-login-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+                    <h5>Recent Login Activity</h5>
+                    <p>Top 10 recent student logins</p>
+                </div>
+            </div>
+
+            <span class="recent-login-count">
+                <i class="fa-solid fa-users me-1"></i>
+                @(Model.RecentLogins?.Count() ?? 0) Records
+            </span>
+        </div>
+
+        <div class="recent-login-table-wrapper">
+            <table class="recent-login-table">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Email Address</th>
+                        <th>Login Date</th>
+                        <th>Login Time</th>
+                        <th class="status-column">Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.RecentLogins != null &&
+                         Model.RecentLogins.Any())
+                    {
+                        foreach (var login in Model.RecentLogins)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="recent-student-info">
+                                        <div class="recent-student-avatar">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                        <span class="recent-student-name">
+                                            @login.Fullname
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="recent-login-email">
+                                        @login.Email
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="recent-login-date">
+                                        @login.LoginTime.ToString("dd MMM yyyy")
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="recent-login-time">
+                                        @login.LoginTime.ToString("hh:mm:ss tt")
+                                    </span>
+                                </td>
+
+                                <td class="status-column">
+                                    <span class="recent-status-badge">
+                                        <span class="status-dot"></span>
+                                        Online Recently
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <div class="recent-login-empty">
+                                    <div class="empty-icon">
+                                        <i class="fa-regular fa-clock"></i>
+                                    </div>
+                                    <h6>No Recent Login Activity</h6>
+                                    <p>Student login records will appear here.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="recent-login-footer">
+            <i class="fa-solid fa-shield-halved"></i>
+            Student login activity
+        </div>
+
+    </section>
+</div>
+
+    </div>
+</div>

@@ -1,0 +1,328 @@
+﻿
+@model ignou.Models.User
+
+@{
+    ViewData["Title"] = "Admin Profile";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/Admin/AdminProfile.css"
+          asp-append-version="true" />
+}
+
+<div class="admin-profile-page">
+
+    <!-- PAGE HEADER -->
+    <div class="admin-profile-page-header">
+        <div>
+            <span class="admin-profile-kicker">
+                <i class="fa-solid fa-user-shield"></i>
+                ADMIN PORTAL
+            </span>
+
+            <h1>My Profile</h1>
+
+            <p>
+                View your personal and official administrator information.
+            </p>
+        </div>
+
+        <div class="admin-profile-status @(Model.IsActive ? "admin-status-active" : "admin-status-inactive")">
+            <i class="fa-solid @(Model.IsActive ? "fa-circle-check" : "fa-circle-xmark")"></i>
+            @(Model.IsActive ? "Active Admin" : "Inactive Admin")
+        </div>
+    </div>
+
+
+    <!-- PROFILE SUMMARY -->
+    <div class="admin-profile-summary">
+
+        <div class="admin-profile-avatar">
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
+
+        <div class="admin-profile-summary-info">
+
+            <span>ADMINISTRATOR</span>
+
+            <h2>@Model.FullName</h2>
+
+            <p>
+                <i class="fa-solid fa-briefcase"></i>
+
+                @(string.IsNullOrWhiteSpace(Model.Designation)
+                    ? "Designation not assigned"
+                    : Model.Designation)
+
+                @if (!string.IsNullOrWhiteSpace(Model.Department))
+                {
+                    <span> • @Model.Department</span>
+                }
+            </p>
+
+            <div class="admin-profile-summary-email">
+                <i class="fa-regular fa-envelope"></i>
+                @Model.Email
+            </div>
+
+            <div class="admin-profile-summary-meta">
+                <span>
+                    <i class="fa-solid fa-id-card"></i>
+                    Employee ID:
+                    @(string.IsNullOrWhiteSpace(Model.EmployeeId)
+                        ? "Not Assigned"
+                        : Model.EmployeeId)
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OFFICIAL INFORMATION -->
+    <div class="admin-profile-section">
+
+        <div class="admin-profile-section-header">
+
+            <div class="admin-section-icon blue">
+                <i class="fa-solid fa-briefcase"></i>
+            </div>
+
+            <div>
+                <h3>Official Information</h3>
+                <p>Your registered employment and role details</p>
+            </div>
+
+        </div>
+
+        <div class="admin-profile-info-grid">
+
+            <div class="admin-profile-info-item">
+                <span>Employee ID</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.EmployeeId)
+                        ? "Not Provided" : Model.EmployeeId)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Department</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.Department)
+                        ? "Not Provided" : Model.Department)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Designation</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.Designation)
+                        ? "Not Provided" : Model.Designation)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>System Role</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.Role)
+                        ? "Not Assigned" : Model.Role)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Account Status</span>
+                <strong class="@(Model.IsActive ? "admin-active-text" : "admin-inactive-text")">
+                    <i class="fa-solid fa-circle"></i>
+                    @(Model.IsActive ? "Active" : "Inactive")
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Account ID</span>
+                <strong>@Model.Id</strong>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- PERSONAL INFORMATION -->
+    <div class="admin-profile-section">
+
+        <div class="admin-profile-section-header">
+
+            <div class="admin-section-icon purple">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+                <h3>Personal Information</h3>
+                <p>Your registered personal details</p>
+            </div>
+
+        </div>
+
+        <div class="admin-profile-info-grid">
+
+            <div class="admin-profile-info-item">
+                <span>Full Name</span>
+                <strong>@Model.FullName</strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Father's Name</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.FatherName)
+                        ? "Not Provided" : Model.FatherName)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Email Address</span>
+                <strong>@Model.Email</strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Mobile Number</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.MobileNo)
+                        ? "Not Provided" : Model.MobileNo)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Date of Birth</span>
+                <strong>
+                    @(Model.DOB != DateTime.MinValue
+                        ? Model.DOB.ToString("dd MMM yyyy")
+                        : "Not Available")
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Gender</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.Gender)
+                        ? "Not Provided" : Model.Gender)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Category</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.Category)
+                        ? "Not Provided" : Model.Category)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Blood Group</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.BloodGroup)
+                        ? "Not Provided" : Model.BloodGroup)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Marital Status</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.MaritalStatus)
+                        ? "Not Provided" : Model.MaritalStatus)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>Personal Disability</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.PersonalDisability)
+                        ? "Not Specified" : Model.PersonalDisability)
+                </strong>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ADDRESS DETAILS -->
+    <div class="admin-profile-section">
+
+        <div class="admin-profile-section-header">
+
+            <div class="admin-section-icon green">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div>
+                <h3>Address Details</h3>
+                <p>Your registered communication address</p>
+            </div>
+
+        </div>
+
+        <div class="admin-profile-info-grid">
+
+            <div class="admin-profile-info-item">
+                <span>House / Address</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.House)
+                        ? "Not Provided" : Model.House)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>City</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.City)
+                        ? "Not Provided" : Model.City)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>District</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.District)
+                        ? "Not Provided" : Model.District)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>State</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.State)
+                        ? "Not Provided" : Model.State)
+                </strong>
+            </div>
+
+            <div class="admin-profile-info-item">
+                <span>PIN Code</span>
+                <strong>
+                    @(string.IsNullOrWhiteSpace(Model.Pincode)
+                        ? "Not Provided" : Model.Pincode)
+                </strong>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- INFORMATION NOTE -->
+    <div class="admin-profile-note">
+
+        <div class="admin-note-icon">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+
+        <div>
+            <strong>Profile Information</strong>
+
+            <p>
+                The information displayed here is based on your registered
+                administrator account. Contact the system administrator
+                if any details need to be corrected.
+            </p>
+        </div>
+
+    </div>
+
+</div>

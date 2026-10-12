@@ -1,8 +1,10 @@
 ﻿using ignou.Data;
 using ignou.Models;
+using ignou.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace ignou.Controllers
 {
@@ -13,15 +15,75 @@ namespace ignou.Controllers
     {
 
         private readonly AppDbContext _db;
+        private readonly IAnnouncementService _announcementService;
 
-        public AdminDashboardController(AppDbContext db)
+        private readonly ILoginHistoryService _loginHistoryService;
+
+        public AdminDashboardController(AppDbContext db , IAnnouncementService announcementService , ILoginHistoryService loginHistoryService)
         {
-            _db = db; 
+            _db = db;
+            _announcementService = announcementService;
+            _loginHistoryService = loginHistoryService;
         }
 
-        public IActionResult Dashboard()
+        [HttpGet]
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+            // 1. Database se saare students laayein
+            var allStudents = await _db.Users
+                                       .Where(u => u.Role == "Student")
+                                       .ToListAsync();
+
+            // 2. Service se saari announcements laayein
+            var allAnnouncements = await _announcementService.GetAllAnnouncementAsync();
+
+            // 3. Subject-wise (Program-wise) grouping karna
+            var programStats = allStudents
+                                .GroupBy(s => s.ProgramName)
+                                .ToDictionary(g => string.IsNullOrEmpty(g.Key) ? "Other" : g.Key, g => g.Count());
+
+
+            //Top 10 latest Login Records
+            var recentLogins = await _loginHistoryService.GetRecentStudentLoginsAsync();
+
+
+            // 4. ViewModel mein poora hisaab-kitab pack karein
+            var dashboardData = new AdminDashboardViewModel
+            {
+                // Student Calculations
+                TotalStudents = allStudents.Count,
+                ActiveStudents = allStudents.Count(s => s.IsActive),
+                InactiveStudents = allStudents.Count(s => !s.IsActive),
+                ProgramWiseStudents = programStats,
+
+                // Announcement Calculations
+                TotalAnnouncements = allAnnouncements.Count(),
+                ActiveAnnouncements = allAnnouncements.Count(a => a.IsActive),
+                InactiveAnnouncements = allAnnouncements.Count(a => !a.IsActive),
+
+                // Recent Data (Top 5 for tables)
+                RecentStudents = allStudents.OrderByDescending(s => s.Id).Take(5),
+                RecentAnnouncements = allAnnouncements.OrderByDescending(a => a.PublishDate).Take(5),
+                RecentLogins = recentLogins
+            };
+
+            return View(dashboardData);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AdminProfile()
+        {
+
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var adminData = await _db.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+            if (adminData == null)
+            {
+                return NotFound();
+            }
+
+            return View(adminData);
         }
 
 
