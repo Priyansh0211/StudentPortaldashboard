@@ -68,6 +68,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
 
+builder.Services.AddScoped<ILoginHistoryRepository, LoginHistoryRepository>();
+builder.Services.AddScoped<ILoginHistoryService, LoginHistoryService>();
+
 var app = builder.Build();
 
 // Insert the initial chatbot FAQ data if it has not been seeded yet.

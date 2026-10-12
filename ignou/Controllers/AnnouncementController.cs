@@ -78,5 +78,13 @@ namespace ignou.Controllers
             return RedirectToAction("ManageAnnouncements","Announcement");
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAnnouncement(int id)
+        {
+            await _announcementService.DeleteAnnouncementAsync(id);
+            return RedirectToAction("ManageAnnouncements");
+        }
+
     }
 }

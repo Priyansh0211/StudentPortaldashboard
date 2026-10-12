@@ -1,5 +1,6 @@
 ﻿using ignou.Data;
 using ignou.Models;
+using ignou.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -15,10 +16,13 @@ namespace ignou.Controllers
         private readonly AppDbContext _db;
         private readonly IConfiguration _config;
 
-        public AccountController(AppDbContext db, IConfiguration config)
+        private readonly ILoginHistoryService _loginHistoryService;
+
+        public AccountController(AppDbContext db, IConfiguration config , ILoginHistoryService loginHistoryService)
         {
             _db = db;
             _config = config;
+            _loginHistoryService = loginHistoryService;
         }
 
         // REGISTER
@@ -27,6 +31,17 @@ namespace ignou.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Dashboard", "AdminDashboard");
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    return RedirectToAction("Dashboard", "StudentDashboard");
+                }
+            }
             return View(new RegisterViewModel());
         }
 
@@ -95,6 +110,17 @@ namespace ignou.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> AdminRegister()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Dashboard", "AdminDashboard");
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    return RedirectToAction("Dashboard", "StudentDashboard");
+                }
+            }
             return View();
         }
 
@@ -175,6 +201,19 @@ namespace ignou.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
+
+            if(User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Dashboard", "AdminDashboard");
+                }
+                else if(User.IsInRole("Student"))
+                {
+                    return RedirectToAction("Dashboard", "StudentDashboard");
+                }
+            }
+
             return View();
         }
 
@@ -219,6 +258,8 @@ namespace ignou.Controllers
                     Expires = DateTime.UtcNow.AddHours(2)
                 }
             );
+
+            _loginHistoryService.RecordUserLoginAsync(user.Email, user.FullName, user.Role);
 
             if (user.Role == "Admin")
             {

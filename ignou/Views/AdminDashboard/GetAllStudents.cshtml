@@ -1,8 +1,12 @@
-﻿@model IEnumerable<ignou.Models.User>
+﻿
+@model IEnumerable<ignou.Models.User>
 
 @{
-    ViewData["Title"] = "All Students";
-    // Layout = "_AdminLayout";
+    ViewData["Title"] = "Manage Students";
+    var students = Model?.ToList() ?? new List<ignou.Models.User>();
+    var totalStudents = students.Count;
+    var activeStudents = students.Count(s => s.IsActive);
+    var inactiveStudents = totalStudents - activeStudents;
 }
 
 @section Styles {
@@ -12,378 +16,343 @@
 }
 
 <div class="students-page">
-
     <div class="students-container">
 
-        <!-- =========================
-             PAGE HEADER
-        ========================== -->
         <div class="students-page-header">
-
             <div class="page-heading-content">
-
                 <span class="page-kicker">
                     <i class="fa-solid fa-users-gear"></i>
-                    ADMIN DASHBOARD
+                    STUDENT MANAGEMENT
                 </span>
-
                 <h1>Manage Students</h1>
-
-                <p>
-                    View, edit, and manage all registered students
-                    in the VNOU system.
-                </p>
-
+                <p>View, search and manage all registered students in the VNOU system.</p>
             </div>
 
             <div class="page-heading-action">
-
                 <a href="@Url.Action("AddStudent", "AdminDashboard")"
                    class="add-student-btn">
-
                     <i class="fa-solid fa-user-plus"></i>
-
                     <span>Add New Student</span>
-
                 </a>
-
             </div>
-
         </div>
 
-
-        <!-- =========================
-             STUDENT DATABASE CARD
-        ========================== -->
-        <section class="student-database-card">
-
-            <!-- Card Header -->
-            <div class="student-card-header">
-
-                <div class="student-card-icon">
-                    <i class="fa-solid fa-clipboard-list"></i>
-                </div>
-
-                <div>
-                    <h2>Student Database</h2>
-
-                    <p>
-                        Complete list of enrolled students
-                    </p>
-                </div>
-
-            </div>
-
-
-            <!-- Table -->
-            <div class="student-table-wrapper">
-
-                <table class="student-table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th class="serial-column">
-                                S.NO
-                            </th>
-
-                            <th>
-                                STUDENT INFO
-                            </th>
-
-                            <th>
-                                CONTACT DETAILS
-                            </th>
-
-                            <th>
-                                PROGRAMME
-                            </th>
-
-                            <th>
-                                STATUS
-                            </th>
-
-                            <th class="actions-column">
-                                ACTIONS
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        @if (Model != null && Model.Any())
-                        {
-                            int serialNo = 1;
-
-                            foreach (var student in Model)
-                            {
-                                <tr>
-
-                                    <!-- S.NO -->
-                                    <td class="serial-number">
-                                        @serialNo
-                                    </td>
-
-
-                                    <!-- STUDENT INFO -->
-                                    <td>
-
-                                        <div class="student-info">
-
-                                            <div class="student-name">
-                                                @student.FullName
-                                            </div>
-
-                                            <div class="student-id">
-
-                                                <i class="fa-solid fa-id-card"></i>
-
-                                                @student.AadhaarNo
-
-                                            </div>
-
-                                        </div>
-
-                                    </td>
-
-
-                                    <!-- CONTACT DETAILS -->
-                                    <td>
-
-                                        <div class="contact-details">
-
-                                            <div class="contact-item">
-
-                                                <i class="fa-regular fa-envelope"></i>
-
-                                                <span>
-                                                    @student.Email
-                                                </span>
-
-                                            </div>
-
-                                            <div class="contact-item">
-
-                                                <i class="fa-solid fa-phone"></i>
-
-                                                <span>
-                                                    @student.MobileNo
-                                                </span>
-
-                                            </div>
-
-                                        </div>
-
-                                    </td>
-
-
-                                    <!-- PROGRAMME -->
-                                    <td>
-
-                                        <div class="programme-info">
-
-                                            <span class="programme-badge">
-                                                @student.ProgramName
-                                            </span>
-
-                                            <span class="programme-type">
-                                                @student.ProgramType
-                                            </span>
-
-                                        </div>
-
-                                    </td>
-
-
-                                    <!-- STATUS -->
-                                    <td>
-
-                                        @if (student.IsActive)
-                                        {
-                                            <span class="student-status active">
-
-                                                <i class="fa-solid fa-circle-check"></i>
-
-                                                Active
-
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span class="student-status inactive">
-
-                                                <i class="fa-solid fa-circle-xmark"></i>
-
-                                                Inactive
-
-                                            </span>
-                                        }
-
-                                    </td>
-
-
-                                    <!-- ACTIONS -->
-                                    <td>
-
-                                        <div class="student-actions">
-
-    <a asp-action="StudentDetails"
-       asp-route-id="@student.Id"
-       class="student-action-btn view-btn"
-       title="View Student">
-
-        <i class="fa-solid fa-eye"></i>
-
-    </a>
-
-
-    <a asp-action="EditStudent"
-       asp-route-id="@student.Id"
-       class="student-action-btn edit-btn"
-       title="Edit Student">
-
-        <i class="fa-solid fa-pen-to-square"></i>
-
-    </a>
-
-
-    <form asp-controller="AdminDashboard"
-          asp-action="DeleteStudent"
-          asp-route-id="@student.Id"
-          method="post"
-          class="delete-student-form">
-
-        @Html.AntiForgeryToken()
-
-        <button type="submit"
-                class="student-action-btn delete-student-btn"
-                data-student-name="@student.FullName"
-                title="Delete Student">
-
-            <i class="fa-solid fa-trash"></i>
-
-        </button>
-
-    </form>
-
-</div>
-                                    </td>
-
-                                </tr>
-
-                                serialNo++;
-                            }
-                        }
-                        else
-                        {
-                            <!-- =========================
-                                 EMPTY STATE
-                            ========================== -->
-
-                            <tr>
-
-                                <td colspan="6">
-
-                                    <div class="students-empty-state">
-
-                                        <div class="empty-icon">
-                                            <i class="fa-solid fa-folder-open"></i>
-                                        </div>
-
-                                        <h3>
-                                            No Students Found
-                                        </h3>
-
-                                        <p>
-                                            There are currently no students
-                                            registered in the system.
-                                        </p>
-
-                                        <a href="@Url.Action("Register", "Account")"
-                                           class="empty-register-btn">
-
-                                            <i class="fa-solid fa-plus"></i>
-
-                                            Register First Student
-
-                                        </a>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-                        }
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
+        <!-- SUMMARY CARDS -->
+        
+<!-- STUDENT STATISTICS -->
+<div class="student-stats-grid">
+
+    <div class="student-stat-card">
+        <div class="student-stat-icon total-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="student-stat-content">
+            <span>Total Students</span>
+            <h3 id="totalStudents">@((Model ?? Enumerable.Empty<ignou.Models.User>()).Count())</h3>
+        </div>
+    </div>
+
+    <div class="student-stat-card">
+        <div class="student-stat-icon active-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="student-stat-content">
+            <span>Active Students</span>
+            <h3 id="activeStudents">@((Model ?? Enumerable.Empty<ignou.Models.User>()).Count(s => s.IsActive))</h3>
+        </div>
+    </div>
+
+    <div class="student-stat-card">
+        <div class="student-stat-icon inactive-icon">
+            <i class="fa-solid fa-circle-pause"></i>
+        </div>
+        <div class="student-stat-content">
+            <span>Inactive Students</span>
+            <h3 id="inactiveStudents">@((Model ?? Enumerable.Empty<ignou.Models.User>()).Count(s => !s.IsActive))</h3>
+        </div>
     </div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                                            <script>
-    document.addEventListener("DOMContentLoaded", function () {
+        <!-- STUDENT DATABASE -->
+        <section class="student-database-card">
+           
+<div class="student-card-header">
+    <div class="student-card-icon">
+        <i class="fa-solid fa-list"></i>
+    </div>
+    <div>
+        <h2>All Students</h2>
+        <p>Search and manage registered students</p>
+    </div>
+</div>
 
-        const deleteForms = document.querySelectorAll(".delete-student-form");
+<!-- SEARCH AND FILTERS -->
+<div class="student-filter-bar">
 
-        deleteForms.forEach(function (form) {
+    <div class="student-search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search"
+               id="studentSearch"
+               placeholder="Search name, email, mobile..."
+               autocomplete="off" />
+    </div>
 
-            form.addEventListener("submit", function (event) {
+    <select id="studentStatusFilter" class="student-filter-select">
+        <option value="all">All Statuses</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+    </select>
 
-                event.preventDefault();
+    <select id="studentProgrammeFilter" class="student-filter-select">
+        <option value="all">All Programmes</option>
+        @if (Model != null)
+        {
+            foreach (var programme in Model
+                .Where(s => !string.IsNullOrWhiteSpace(s.ProgramName))
+                .Select(s => s.ProgramName)
+                .Distinct()
+                .OrderBy(p => p))
+            {
+                <option value="@programme">@programme</option>
+            }
+        }
+    </select>
 
-                const button = form.querySelector(".delete-student-btn");
-                const studentName = button.dataset.studentName;
+</div>
 
-                Swal.fire({
-                    title: "Delete Student?",
-                    html: `
-                        Are you sure you want to permanently delete
-                        <strong>${studentName}</strong>?
-                        <br> `,
-                    icon: "warning",
 
-                    showCancelButton: true,
+            <div class="student-table-wrapper">
+                <table class="student-table" id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th class="serial-column">S.NO</th>
+                            <th>STUDENT INFO</th>
+                            <th>CONTACT DETAILS</th>
+                            <th>PROGRAMME</th>
+                            <th>STATUS</th>
+                            <th class="actions-column">ACTIONS</th>
+                        </tr>
+                    </thead>
 
-                    confirmButtonText: '<i class="fa-solid fa-trash"></i> Yes, Delete',
-                    cancelButtonText: '<i class="fa-solid fa-xmark"></i> Cancel',
+                    <tbody>
+                    @if (students.Any())
+                    {
+                        var serialNo = 1;
 
-                    reverseButtons: true,
+                        foreach (var student in students)
+                        {
+                            <tr class="student-row"
+                                data-search="@($"{student.FullName} {student.Email} {student.MobileNo} {student.AadhaarNo} {student.ProgramName}".ToLowerInvariant())"
+                                data-status="@(student.IsActive ? "active" : "inactive")"
+                                data-programme="@(student.ProgramName ?? "")">
 
-                    focusCancel: true,
+                                <!-- Span keeps 10, 11, 21 on one line -->
+                                <td>
+                                    <span class="serial-number">@serialNo</span>
+                                </td>
 
-                    customClass: {
-                        popup: "premium-delete-popup",
-                        title: "premium-delete-title",
-                        htmlContainer: "premium-delete-text",
-                        confirmButton: "premium-delete-confirm",
-                        cancelButton: "premium-delete-cancel"
-                    },
+                                <td>
+                                    <div class="student-info">
+                                        <div class="student-name">@student.FullName</div>
+                                        <div class="student-id">
+                                            <i class="fa-solid fa-id-card"></i>
+                                            <span>@student.AadhaarNo</span>
+                                        </div>
+                                    </div>
+                                </td>
 
-                    buttonsStyling: false
-                }).then((result) => {
+                                <td>
+                                    <div class="contact-details">
+                                        <div class="contact-item">
+                                            <i class="fa-regular fa-envelope"></i>
+                                            <span>@student.Email</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <span>@student.MobileNo</span>
+                                        </div>
+                                    </div>
+                                </td>
 
-                    if (result.isConfirmed) {
-                        form.submit();
+                                <td>
+                                    <div class="programme-info">
+                                        <span class="programme-badge">@student.ProgramName</span>
+                                        <span class="programme-type">@student.ProgramType</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    @if (student.IsActive)
+                                    {
+                                        <span class="student-status active">
+                                            <i class="fa-solid fa-circle-check"></i> Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="student-status inactive">
+                                            <i class="fa-solid fa-circle-xmark"></i> Inactive
+                                        </span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="student-actions">
+                                        <a asp-action="StudentDetails"
+                                           asp-route-id="@student.Id"
+                                           class="student-action-btn view-btn"
+                                           title="View Student"
+                                           aria-label="View student">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+
+                                        <a asp-action="EditStudent"
+                                           asp-route-id="@student.Id"
+                                           class="student-action-btn edit-btn"
+                                           title="Edit Student"
+                                           aria-label="Edit student">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+
+                                        <form asp-controller="AdminDashboard"
+                                              asp-action="DeleteStudent"
+                                              asp-route-id="@student.Id"
+                                              method="post"
+                                              class="delete-student-form">
+                                            @Html.AntiForgeryToken()
+
+                                            <button type="submit"
+                                                    class="student-action-btn delete-student-btn"
+                                                    data-student-name="@student.FullName"
+                                                    title="Delete Student"
+                                                    aria-label="Delete student">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            serialNo++;
+                        }
                     }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">
+                                <div class="students-empty-state">
+                                    <div class="empty-icon">
+                                        <i class="fa-solid fa-folder-open"></i>
+                                    </div>
+                                    <h3>No Students Found</h3>
+                                    <p>There are currently no registered students.</p>
+                                    <a href="@Url.Action("Register", "Account")"
+                                       class="empty-register-btn">
+                                        <i class="fa-solid fa-plus"></i>
+                                        Register First Student
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
 
-                });
+                <div id="studentNoResults" class="student-no-results" hidden>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    No students match your search or filters.
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 
-            });
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        });
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("studentSearch");
+            const statusFilter = document.getElementById("studentStatusFilter");
+            const programmeFilter = document.getElementById("studentProgrammeFilter");
+            const rows = Array.from(document.querySelectorAll(".student-row"));
+            const noResults = document.getElementById("studentNoResults");
 
+            
+function filterStudents() {
+    const query = (searchInput.value || "").trim().toLowerCase();
+    const status = (statusFilter.value || "all").trim().toLowerCase();
+    const programme = (programmeFilter.value || "all").trim().toLowerCase();
+
+    let visibleCount = 0;
+
+    rows.forEach(function (row) {
+        const searchText = (row.dataset.search || "").toLowerCase();
+        const rowStatus = (row.dataset.status || "").trim().toLowerCase();
+        const rowProgramme = (row.dataset.programme || "").trim().toLowerCase();
+
+        const matchesSearch = searchText.includes(query);
+
+        const matchesStatus =
+            status === "all" || rowStatus === status;
+
+        const matchesProgramme =
+            programme === "all" || rowProgramme === programme;
+
+        const visible =
+            matchesSearch && matchesStatus && matchesProgramme;
+
+        row.hidden = !visible;
+
+        if (visible) {
+            visibleCount++;
+        }
     });
-</script>
+
+    noResults.hidden = visibleCount > 0;
+}
+
+
+            searchInput.addEventListener("input", filterStudents);
+statusFilter.addEventListener("change", filterStudents);
+programmeFilter.addEventListener("change", filterStudents);
+
+
+filterStudents();
+
+            document.querySelectorAll(".delete-student-form").forEach(function (form) {
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    const button = form.querySelector(".delete-student-btn");
+                    const studentName = button.dataset.studentName || "this student";
+
+                    Swal.fire({
+                        title: "Delete Student?",
+                        html: `Are you sure you want to permanently delete <strong>${studentName}</strong>?`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: '<i class="fa-solid fa-trash"></i> Yes, Delete',
+                        cancelButtonText: '<i class="fa-solid fa-xmark"></i> Cancel',
+                        reverseButtons: true,
+                        focusCancel: true,
+                        customClass: {
+                            popup: "premium-delete-popup",
+                            title: "premium-delete-title",
+                            htmlContainer: "premium-delete-text",
+                            confirmButton: "premium-delete-confirm",
+                            cancelButton: "premium-delete-cancel"
+                        },
+                        buttonsStyling: false
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}
