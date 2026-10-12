@@ -1,0 +1,60 @@
+﻿<div id="vmou-chatbot">
+
+    <!-- Floating Chat Button -->
+    <button type="button"
+            id="chatbotToggle"
+            class="chatbot-toggle"
+            aria-label="Open chatbot"
+            aria-expanded="false">
+        <i class="fa-solid fa-comments"></i>
+        <span class="chatbot-status-dot"></span>
+    </button>
+
+    <!-- Chat Window -->
+    <section id="chatbotWindow"
+             class="chatbot-window"
+             aria-label="VMOU Help Chat"
+             aria-hidden="true">
+
+        <header class="chatbot-header">
+            <div class="chatbot-brand">
+                <div class="chatbot-avatar">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h3>VMOU Help Assistant</h3>
+                    <p><span class="online-dot"></span> Online assistance</p>
+                </div>
+            </div>
+
+            <button type="button"
+                    id="chatbotClose"
+                    class="chatbot-close"
+                    aria-label="Close chatbot">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </header>
+
+        <div id="chatbotMessages" class="chatbot-messages"
+             aria-live="polite">
+
+            <div class="chatbot-message bot-message">
+                Welcome to VMOU! 👋
+                <br />
+                How can I help you today? Please select a topic below.
+            </div>
+
+            <div id="chatbotCategories" class="chatbot-options">
+                <span class="chatbot-loading">Loading questions...</span>
+            </div>
+
+        </div>
+
+        <footer class="chatbot-footer">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Select a question to get an answer.</span>
+        </footer>
+
+    </section>
+</div>
