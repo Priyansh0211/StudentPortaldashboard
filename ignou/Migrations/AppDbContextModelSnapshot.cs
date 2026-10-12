@@ -57,7 +57,11 @@ namespace ignou.Migrations
                     b.ToTable("Announcements");
                 });
 
+<<<<<<< Updated upstream
             modelBuilder.Entity("ignou.Models.ChatbotCategory", b =>
+=======
+            modelBuilder.Entity("ignou.Models.LoginHistory", b =>
+>>>>>>> Stashed changes
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,6 +69,7 @@ namespace ignou.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+<<<<<<< Updated upstream
                     b.Property<string>("Description")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
@@ -148,6 +153,26 @@ namespace ignou.Migrations
                     b.HasIndex("NextFaqId");
 
                     b.ToTable("ChatbotOptions");
+=======
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LoginHistories");
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("ignou.Models.User", b =>

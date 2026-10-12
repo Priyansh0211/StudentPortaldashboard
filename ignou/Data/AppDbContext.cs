@@ -10,6 +10,7 @@ namespace ignou.Data
         public DbSet<User> Users { get; set; } 
         public DbSet<Announcement> Announcements { get; set; }
 
+<<<<<<< Updated upstream
         public DbSet<ChatbotCategory> ChatbotCategories { get; set; }
 
         public DbSet<ChatbotFaq> ChatbotFAQs { get; set; }
@@ -46,5 +47,8 @@ namespace ignou.Data
                 .HasIndex(c => c.Name)
                 .IsUnique();
         }
+=======
+        public DbSet<LoginHistory> LoginHistories { get; set; }
+>>>>>>> Stashed changes
     }
 }
