@@ -57,6 +57,99 @@ namespace ignou.Migrations
                     b.ToTable("Announcements");
                 });
 
+            modelBuilder.Entity("ignou.Models.ChatbotCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ChatbotCategories");
+                });
+
+            modelBuilder.Entity("ignou.Models.ChatbotFaq", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("ChatbotFAQs");
+                });
+
+            modelBuilder.Entity("ignou.Models.ChatbotOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FaqId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NextFaqId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OptionText")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FaqId");
+
+                    b.HasIndex("NextFaqId");
+
+                    b.ToTable("ChatbotOptions");
+                });
+
             modelBuilder.Entity("ignou.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -165,6 +258,45 @@ namespace ignou.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ignou.Models.ChatbotFaq", b =>
+                {
+                    b.HasOne("ignou.Models.ChatbotCategory", "Category")
+                        .WithMany("FAQs")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ignou.Models.ChatbotOption", b =>
+                {
+                    b.HasOne("ignou.Models.ChatbotFaq", "Faq")
+                        .WithMany("FollowUpOptions")
+                        .HasForeignKey("FaqId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ignou.Models.ChatbotFaq", "NextFaq")
+                        .WithMany()
+                        .HasForeignKey("NextFaqId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Faq");
+
+                    b.Navigation("NextFaq");
+                });
+
+            modelBuilder.Entity("ignou.Models.ChatbotCategory", b =>
+                {
+                    b.Navigation("FAQs");
+                });
+
+            modelBuilder.Entity("ignou.Models.ChatbotFaq", b =>
+                {
+                    b.Navigation("FollowUpOptions");
                 });
 #pragma warning restore 612, 618
         }

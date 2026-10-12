@@ -1,5 +1,9 @@
 ﻿@model ignou.Models.RegisterViewModel
 
+<link rel="stylesheet"
+      href="~/css/Register.css"
+      asp-append-version="true" />
+
 @{
     ViewData["Title"] = "Student Registration";
 }
@@ -12,38 +16,35 @@
              PAGE HEADER
          -->
 
-        <div class="registration-heading">
+         <div class="register-brand">
+    <div class="register-brand-images">
+        <img src="~/images/vmou-logo.png"
+             alt="Vardhman Mahaveer Open University Logo"
+             class="register-university-logo" />
+    </div>
 
-            <div>
+    <div class="register-heading-text">
+        <span class="page-kicker">
+            <i class="fa-solid fa-user-plus"></i>
+            STUDENT PORTAL
+        </span>
 
-                <span class="page-kicker">
-                    <i class="fa-solid fa-user-plus"></i>
-                    STUDENT PORTAL
-                </span>
+        <h1>Create Your Student Account</h1>
 
-                <h1>Create Your Student Account</h1>
+        <p>
+            Register with VMOU to access your student portal,
+            academic details and online services.
+        </p>
+    </div>
 
-                <p>
-                    Complete the registration form to create your VMOU
-                    student portal account.
-                </p>
-
-            </div>
-
-
-            <div class="secure-badge">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-                <span>
-                    Secure Registration
-                    <small>Your information is protected</small>
-                </span>
-
-            </div>
-
-        </div>
-
+    <div class="secure-badge">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>
+            Secure Registration
+            <small>Your information is protected</small>
+        </span>
+    </div>
+</div>
 
         <!-- 
              VALIDATION SUMMARY
@@ -62,7 +63,7 @@
         <form asp-action="Register"
               asp-controller="Account"
               method="post"
-              class="registration-form">
+              class="registration-form mt-2">
 
             @Html.AntiForgeryToken()
 
