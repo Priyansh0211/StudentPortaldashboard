@@ -23,6 +23,7 @@
 
     @RenderSection("Styles", required: false)
 
+    <link rel="stylesheet" href="~/css/chatbot.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -317,6 +318,9 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 
+    <partial name="_Chatbot" />
+
+<script src="~/js/chatbot.js" asp-append-version="true"></script>
 </body>
 
 </html>
